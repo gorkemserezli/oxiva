@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion } from 'framer-motion'
 
 const tabs = [
@@ -128,6 +128,26 @@ const tabs = [
 
 export default function ProductTabs() {
   const [activeTab, setActiveTab] = useState('description')
+  const tabsContainerRef = useRef<HTMLDivElement>(null)
+  const tabRefs = useRef<{ [key: string]: HTMLButtonElement | null }>({})
+
+  useEffect(() => {
+    // Scroll to active tab when it changes
+    const activeTabElement = tabRefs.current[activeTab]
+    const container = tabsContainerRef.current
+    
+    if (activeTabElement && container) {
+      const containerWidth = container.offsetWidth
+      const tabLeft = activeTabElement.offsetLeft
+      const tabWidth = activeTabElement.offsetWidth
+      const scrollLeft = tabLeft - (containerWidth / 2) + (tabWidth / 2)
+      
+      container.scrollTo({
+        left: scrollLeft,
+        behavior: 'smooth'
+      })
+    }
+  }, [activeTab])
 
   return (
     <section className="py-12 bg-gray-50">
@@ -135,10 +155,14 @@ export default function ProductTabs() {
         <div className="max-w-4xl mx-auto">
           {/* Tab Headers */}
           <div className="border-b border-gray-200 mb-8 -mx-4 sm:mx-0">
-            <div className="flex overflow-x-auto scrollbar-hide px-4 sm:px-0 sm:flex-wrap">
+            <div 
+              ref={tabsContainerRef}
+              className="flex overflow-x-auto scrollbar-hide px-4 sm:px-0 sm:flex-wrap"
+            >
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
+                  ref={(el) => (tabRefs.current[tab.id] = el)}
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 sm:px-6 py-3 font-medium transition-all relative whitespace-nowrap flex-shrink-0 ${
                     activeTab === tab.id
