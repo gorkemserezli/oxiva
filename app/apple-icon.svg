@@ -1,0 +1,10 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="180" height="180" rx="40" fill="#ffffff"/>
+  
+  <!-- Letter O - filled -->
+  <path d="M90 30C61.281 30 38 53.281 38 82C38 110.719 61.281 134 90 134C118.719 134 142 110.719 142 82C142 53.281 118.719 30 90 30ZM90 102C78.954 102 70 93.046 70 82C70 70.954 78.954 62 90 62C101.046 62 110 70.954 110 82C110 93.046 101.046 102 90 102Z" fill="#5BA4D3"/>
+  
+  <!-- Smile curve -->
+  <path d="M45 125 Q90 155 135 125" stroke="#2C4E70" stroke-width="10" stroke-linecap="round" fill="none"/>
+</svg>
