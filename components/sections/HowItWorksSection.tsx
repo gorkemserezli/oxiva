@@ -47,7 +47,7 @@ const steps = [
 
 export default function HowItWorksSection() {
   return (
-    <section id="how-it-works" className="py-20 bg-gray-50">
+    <section id="how-it-works" className="py-20 bg-white">
       <div className="container-max section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

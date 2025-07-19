@@ -1,0 +1,402 @@
+{
+  "cities": [
+    {
+      "id": 34,
+      "name": "İstanbul",
+      "districts": [
+        {
+          "id": 3401,
+          "name": "Adalar",
+          "neighborhoods": ["Burgazada", "Büyükada", "Heybeliada", "Kınalıada", "Maden"]
+        },
+        {
+          "id": 3402,
+          "name": "Arnavutköy",
+          "neighborhoods": ["Anadolu", "Arnavutköy Merkez", "Baklalı", "Balaban", "Başak", "Bolluca", "Boğazköy"]
+        },
+        {
+          "id": 3403,
+          "name": "Ataşehir",
+          "neighborhoods": ["Atatürk", "Barbaros", "Batı Ataşehir", "Esatpaşa", "Fetih", "İçerenköy", "İnönü", "Kayışdağı", "Küçükbakkalköy", "Mevlana", "Mimar Sinan", "Mustafa Kemal", "Örnek", "Yeni Çamlıca", "Yeni Sahra"]
+        },
+        {
+          "id": 3404,
+          "name": "Avcılar",
+          "neighborhoods": ["Ambarlı", "Cihangir", "Denizköşkler", "Firuzköy", "Gümüşpala", "Merkez", "Mustafa Kemal Paşa", "Tahtakale", "Üniversite", "Yeşilkent"]
+        },
+        {
+          "id": 3405,
+          "name": "Bağcılar",
+          "neighborhoods": ["100. Yıl", "15 Temmuz", "Bağlar", "Barbaros", "Çınar", "Demirkapı", "Evren", "Fatih", "Fevzi Çakmak", "Göztepe", "Güneşli", "Hürriyet", "İnönü", "Kazım Karabekir", "Kemalpaşa", "Kirazlı", "Mahmutbey", "Merkez", "Sancaktepe", "Yavuz Selim", "Yenigün", "Yenimahalle", "Yıldıztepe", "Yüzyıl"]
+        },
+        {
+          "id": 3406,
+          "name": "Bahçelievler",
+          "neighborhoods": ["Bahçelievler Merkez", "Cumhuriyet", "Çobançeşme", "Fevzi Çakmak", "Hürriyet", "Kocasinan Merkez", "Siyavuşpaşa", "Soğanlı", "Şirinevler", "Yenibosna", "Zafer"]
+        },
+        {
+          "id": 3407,
+          "name": "Bakırköy",
+          "neighborhoods": ["Ataköy 1. Kısım", "Ataköy 2-5-6. Kısım", "Ataköy 3-4-11. Kısım", "Ataköy 7-8-9-10. Kısım", "Basınköy", "Cevizlik", "Kartaltepe", "Osmaniye", "Sakızağacı", "Şenlikköy", "Yenimahalle", "Yeşilköy", "Yeşilyurt", "Zeytinlik", "Zuhuratbaba"]
+        },
+        {
+          "id": 3408,
+          "name": "Başakşehir",
+          "neighborhoods": ["Altınşehir", "Bahçeşehir 1. Kısım", "Bahçeşehir 2. Kısım", "Başak", "Başakşehir", "Güvercintepe", "Kayabaşı", "Şahintepe", "Şamlar", "Ziya Gökalp"]
+        },
+        {
+          "id": 3409,
+          "name": "Bayrampaşa",
+          "neighborhoods": ["Altıntepsi", "Cevatpaşa", "İsmetpaşa", "Kartaltepe", "Kocatepe", "Muratpaşa", "Orta", "Terazidere", "Vatan", "Yenidoğan", "Yıldırım"]
+        },
+        {
+          "id": 3410,
+          "name": "Beşiktaş",
+          "neighborhoods": ["Abbasağa", "Akatlar", "Arnavutköy", "Bebek", "Balmumcu", "Beşiktaş", "Cihannüma", "Dikilitaş", "Etiler", "Gayrettepe", "Konaklar", "Kuruçeşme", "Kültür", "Levazım", "Levent", "Mecidiye", "Muradiye", "Nisbetiye", "Ortaköy", "Sinanpaşa", "Türkali", "Ulus", "Vişnezade", "Yıldız"]
+        },
+        {
+          "id": 3411,
+          "name": "Beykoz",
+          "neighborhoods": ["Acarlar", "Anadolu Hisarı", "Anadolu Kavağı", "Baklacı", "Bozhane", "Cumhuriyet", "Çengeldere", "Çiğdem", "Çubuklu", "Dereseki", "Elmalı", "Fatih", "Göksu", "Göllü", "Göztepe", "Gümüşsuyu", "İncirköy", "Kanlıca", "Kaynarca", "Kavacık", "Kılıçlı", "Mahmut Şevket Paşa", "Merkez", "Örnekköy", "Paşabahçe", "Polonezköy", "Poyrazköy", "Rüzgarlıbahçe", "Riva", "Soğuksu", "Tokatköy", "Yalıköy", "Yavuz Selim", "Yenimahalle"]
+        },
+        {
+          "id": 3412,
+          "name": "Beylikdüzü",
+          "neighborhoods": ["Adnan Kahveci", "Barış", "Büyükşehir", "Cumhuriyet", "Dereağzı", "Gürpınar", "Kavaklı", "Marmara", "Sahil", "Yakuplu"]
+        },
+        {
+          "id": 3413,
+          "name": "Beyoğlu",
+          "neighborhoods": ["Arap Cami", "Asmalı Mescit", "Bedrettin", "Bereketzade", "Bostan", "Bülbül", "Camiikebir", "Cihangir", "Çatma Mescit", "Çukur", "Emekyemez", "Evliya Çelebi", "Fetihtepe", "Firuzağa", "Gümüşsuyu", "Hacıahmet", "Hacımimi", "Halıcıoğlu", "Hüseyinağa", "İstiklal", "Kadı Mehmet Efendi", "Kalyoncu Kulluğu", "Kamer Hatun", "Kaptan", "Katip Mustafa Çelebi", "Keçeci Piri", "Kemankeş Karamustafa Paşa", "Kılıçali Paşa", "Kocatepe", "Kulaksız", "Kuloğlu", "Küçük Piyale", "Merkez", "Müeyyedzade", "Ömer Avni", "Örnektepe", "Piri Paşa", "Piyalepaşa", "Pürtelaş Hasan Efendi", "Sururi Mehmet Efendi", "Sütlüce", "Şahkulu", "Şehit Muhtar", "Tomtom", "Yahya Kahya", "Yenişehir"]
+        },
+        {
+          "id": 3414,
+          "name": "Büyükçekmece",
+          "neighborhoods": ["19 Mayıs", "Ahmediye", "Ahmetli", "Atatürk", "Bahçelievler", "Büyükçekmece Merkez", "Celaliye", "Cumhuriyet", "Çakmaklı", "Dereköy", "Dizdariye", "Ekinoba", "Eskice", "Fatih", "Güzelce", "Hürriyet", "Karaağaç", "Kamiloba", "Kumburgaz", "Mimaroba", "Mimarsinan", "Muratbey", "Pınartepe", "Sinanoba", "Tepecik", "Türkoba", "Ulus", "Yenimahalle"]
+        },
+        {
+          "id": 3415,
+          "name": "Çatalca",
+          "neighborhoods": ["Akalan", "Aydınlar", "Bahşayış", "Başak", "Belgrat", "Celepköy", "Çakıl", "Çanakça", "Çatalca Merkez", "Çiftlikköy", "Dağyenice", "Elbasan", "Fatih", "Ferhatpaşa", "Gökçeali", "Gümüşpınar", "Hallaçlı", "Hisarbeyli", "İhsaniye", "İnceğiz", "İzzettin", "Kabakça", "Kaleiçi", "Kalfa", "Karacaköy", "Karamandere", "Kestanelik", "Kızılcaali", "Muratbey", "Nakkaş", "Oklalı", "Ormanlı", "Örencik", "Örcünlü", "Ovayenice", "Subaşı", "Yalıköy", "Yaylacık", "Yazlık", "Yeniköy"]
+        },
+        {
+          "id": 3416,
+          "name": "Çekmeköy",
+          "neighborhoods": ["Alemdağ", "Aydınlar", "Çamlık", "Çatalmeşe", "Çekmeköy Merkez", "Ekşioğlu", "Güngören", "Hamidiye", "Hüseyinli", "Kirazlıdere", "Koçullu", "Mehmet Akif", "Merkez", "Mimar Sinan", "Nişantepe", "Ömerli", "Reşadiye", "Sırapınar", "Sultançiftliği", "Taşdelen"]
+        },
+        {
+          "id": 3417,
+          "name": "Esenler",
+          "neighborhoods": ["15 Temmuz", "Atışalanı", "Birlik", "Çiftehavuzlar", "Davutpaşa", "Fatih", "Fevzi Çakmak", "Havaalanı", "Kazım Karabekir", "Kemer", "Menderes", "Mimar Sinan", "Namık Kemal", "Nene Hatun", "Nine Hatun", "Oruçreis", "Tuna", "Turgutreis", "Yavuz Selim"]
+        },
+        {
+          "id": 3418,
+          "name": "Esenyurt",
+          "neighborhoods": ["Akçaburgaz", "Akevler", "Akşemseddin", "Ardıçlı", "Aşık Veysel", "Atatürk", "Balık Yolu", "Barbaros Hayrettin Paşa", "Battalgazi", "Bağlarçeşme", "Cumhuriyet", "Çınar", "Esenkent", "Fatih", "Güzelyurt", "Haramidere", "Hürriyet", "İncirtepe", "İnönü", "İstiklal", "Kapadık", "Kıraç", "Koza", "Mehmet Akif Ersoy", "Mehterçeşme", "Mevlana", "Namık Kemal", "Necip Fazıl Kısakürek", "Nenehatun", "Örnek", "Osmangazi", "Pınar", "Piri Reis", "Saadetdere", "Selahaddin Eyyubi", "Sultaniye", "Süleymaniye", "Şehitler", "Talatpaşa", "Turgut Özal", "Üçevler", "Yenikent", "Yeşilkent", "Yunus Emre", "Zafer"]
+        },
+        {
+          "id": 3419,
+          "name": "Eyüpsultan",
+          "neighborhoods": ["Akpınar", "Alibeyköy", "Çırçır", "Defterdar", "Düğmeciler", "Emniyettepe", "Esentepe", "Eyüp Merkez", "Göktürk", "Güzeltepe", "İslambey", "Karadolap", "Merkez", "Mimarsinan", "Mithatpaşa", "Nişanca", "Odayeri", "Pirinççi", "Rami Cuma", "Rami Yeni", "Sakarya", "Silahtarağa", "Topçular", "Yeşilpınar"]
+        },
+        {
+          "id": 3420,
+          "name": "Fatih",
+          "neighborhoods": ["Aksaray", "Akşemseddin", "Alemdar", "Ali Kuşçu", "Atikali", "Ayvansaray", "Balabanağa", "Balat", "Beyazıt", "Binbirdirek", "Cankurtaran", "Cerrahpaşa", "Demirtaş", "Derviş Ali", "Eminsinan", "Hacı Kadın", "Hacıkadın", "Haseki Sultan", "Hırka-i Şerif", "Hobyar", "Hoca Gıyasettin", "Hoca Paşa", "İskenderpaşa", "Kalenderhane", "Karagümrük", "Katip Kasım", "Kemal Paşa", "Koca Mustafa Paşa", "Küçük Ayasofya", "Mercan", "Mesih Paşa", "Mevlanakapı", "Mimar Hayrettin", "Mimar Kemalettin", "Mollafenari", "Mollahüsrev", "Muhsine Hatun", "Nişanca", "Rüstem Paşa", "Saraç İshak", "Sarıdemir", "Seyyid Ömer", "Silivrikapı", "Sultan Ahmet", "Sururi", "Süleymaniye", "Sümbül Efendi", "Şehremini", "Şehsuvarbey", "Tahtakale", "Tayahatun", "Topkapı", "Yavuz Sinan", "Yavuz Sultan Selim", "Yedikule", "Zeyrek"]
+        },
+        {
+          "id": 3421,
+          "name": "Gaziosmanpaşa",
+          "neighborhoods": ["Bağlarbaşı", "Barbaros Hayrettin Paşa", "Başıbüyük", "Bolayır", "Fevzi Çakmak", "Habibler", "Hürriyet", "Karadeniz", "Karayolları", "Karlıtepe", "Kazım Karabekir", "Merkez", "Mevlana", "Pazariçi", "Sarıgöl", "Yeni Mahalle", "Yenidoğan", "Yıldıztabya"]
+        },
+        {
+          "id": 3422,
+          "name": "Güngören",
+          "neighborhoods": ["Abdurrahman Nafiz Gürman", "Akıncılar", "Güneştepe", "Güven", "Haznedar", "Mareşal Çakmak", "Mehmet Nesih Özmen", "Merkez", "Sanayi", "Tozkoparan", "Güngören Merkez"]
+        },
+        {
+          "id": 3423,
+          "name": "Kadıköy",
+          "neighborhoods": ["19 Mayıs", "Acıbadem", "Bostancı", "Caddebostan", "Caferağa", "Dumlupınar", "Eğitim", "Erenköy", "Fenerbahçe", "Feneryolu", "Fikirtepe", "Göztepe", "Hasanpaşa", "Koşuyolu", "Kozyatağı", "Merdivenköy", "Osmanağa", "Rasimpaşa", "Sahrayıcedit", "Suadiye", "Zühtüpaşa"]
+        },
+        {
+          "id": 3424,
+          "name": "Kağıthane",
+          "neighborhoods": ["Çağlayan", "Çeliktepe", "Emniyet Evleri", "Gültepe", "Gürsel", "Hamidiye", "Harmantepe", "Hürriyet", "Mehmet Akif Ersoy", "Merkez", "Nurtepe", "Ortabayır", "Sanayi", "Seyrantepe", "Şirintepe", "Talatpaşa", "Telsizler", "Yahya Kemal", "Yeşilce"]
+        },
+        {
+          "id": 3425,
+          "name": "Kartal",
+          "neighborhoods": ["Atalar", "Başaran", "Cevizli", "Cumhuriyet", "Çavuşoğlu", "Esentepe", "Gümüşpınar", "Hürriyet", "Karlıktepe", "Kordonboyu", "Orhantepe", "Orta", "Petroliş", "Soğanlık Yeni", "Topselvi", "Uğur Mumcu", "Yakacık Çarşı", "Yakacık Yeni", "Yalı", "Yukarı", "Yunus"]
+        },
+        {
+          "id": 3426,
+          "name": "Küçükçekmece",
+          "neighborhoods": ["Atakent", "Atatürk", "Başak", "Beşyol", "Cennet", "Cumhuriyet", "Fatih", "Fevzi Çakmak", "Gültepe", "Halkalı Merkez", "İnönü", "İstasyon", "Kanarya", "Kartaltepe", "Kemalpaşa", "Mehmet Akif", "Söğütlü Çeşme", "Sultan Murat", "Tevfikbey", "Yarımburgaz", "Yeni Mahalle", "Yeşilova"]
+        },
+        {
+          "id": 3427,
+          "name": "Maltepe",
+          "neighborhoods": ["Altayçeşme", "Altıntepe", "Aydınevler", "Bağlarbaşı", "Başıbüyük", "Büyükbakkalköy", "Cevizli", "Çınar", "Esenkent", "Feyzullah", "Fındıklı", "Girne", "Gülsuyu", "Gülensu", "İdealtepe", "Küçükyalı", "Yalı", "Zümrütevler"]
+        },
+        {
+          "id": 3428,
+          "name": "Pendik",
+          "neighborhoods": ["Ahmet Yesevi", "Bahçelievler", "Batı", "Çamçeşme", "Çınardere", "Doğu", "Dumlupınar", "Ertuğrul Gazi", "Esenyalı", "Fevzi Çakmak", "Güllü Bağlar", "Güzelyalı", "Kavakpınar", "Kaynarca", "Orta", "Orhangazi", "Ramazanoğlu", "Sapan Bağları", "Sülüntepe", "Şeyhli", "Velibaba", "Yayalar", "Yeni", "Yenişehir", "Yeşilbağlar"]
+        },
+        {
+          "id": 3429,
+          "name": "Sancaktepe",
+          "neighborhoods": ["Abdurrahmangazi", "Akpınar", "Atatürk", "Aydın", "Büyükbakkalköy", "Cebeci", "Emek", "Eyüp Sultan", "Fatih", "Hilal", "İnönü", "Kemal Türkler", "Meclis", "Merve", "Mevlana", "Osmangazi", "Paşaköy", "Sarıgazi", "Veysel Karani", "Yenidoğan", "Yunus Emre"]
+        },
+        {
+          "id": 3430,
+          "name": "Sarıyer",
+          "neighborhoods": ["Ayazağa", "Bahçeköy", "Baltalimanı", "Büyükdere", "Çayırbaşı", "Darüşşafaka", "Demirciköy", "Emirgan", "Fatih Sultan Mehmet", "Ferahevler", "Garipçe", "Huzur", "İstinye", "Kâzım Karabekir", "Kilyos", "Kireçburnu", "Kocataş", "Kültür", "Maslak", "Merkez", "Maden", "Pınar", "Poligon", "PTT Evleri", "Reşitpaşa", "Rumeli Feneri", "Rumeli Hisarı", "Rumeli Kavağı", "Sarıyer Merkez", "Tarabya", "Uskumruköy", "Yeni Mahalle", "Yeniköy", "Zekeriyaköy"]
+        },
+        {
+          "id": 3431,
+          "name": "Silivri",
+          "neighborhoods": ["Alipaşa", "Beyciler", "Büyük Çavuşlu", "Büyük Kılıçlı", "Büyük Sinekli", "Celaliye", "Cumhuriyet", "Çanta", "Çayırdere", "Çeltik", "Danamandıra", "Değirmenköy", "Fatih", "Fevzipaşa", "Fener", "Gümüşyaka", "Hürriyet", "İsmetpaşa", "Kadıköy", "Kavaklı", "Kurfallı", "Küçük Kılıçlı", "Küçük Sinekli", "Mimar Sinan", "Mimarsinan", "Ortaköy", "Piri Mehmet Paşa", "Sayalar", "Selimpaşa", "Semizkumlar", "Seymen", "Yeni Mahalle", "Yolçatı"]
+        },
+        {
+          "id": 3432,
+          "name": "Sultanbeyli",
+          "neighborhoods": ["Abdurrahmangazi", "Adil", "Ahmet Yesevi", "Akşemsettin", "Battalgazi", "Fatih", "Hamidiye", "Hasanpaşa", "Mecidiye", "Mehmet Akif", "Mimar Sinan", "Necip Fazıl", "Orhangazi", "Turgut Reis", "Yavuz Selim"]
+        },
+        {
+          "id": 3433,
+          "name": "Sultangazi",
+          "neighborhoods": ["50. Yıl", "75. Yıl", "Cebeci", "Cumhuriyet", "Esentepe", "Eski Habipler", "Gazi", "İsmetpaşa", "Malkoçoğlu", "Sultançiftliği", "Sultantepe", "Uğur Mumcu", "Yayla", "Yunus Emre", "Zübeyde Hanım"]
+        },
+        {
+          "id": 3434,
+          "name": "Şile",
+          "neighborhoods": ["Ağva Merkez", "Ahmetli", "Akçakese", "Alacalı", "Avcıkoru", "Balibey", "Bıçkıdere", "Binkılıç", "Bucaklı", "Çataklı", "Çayırbaşı", "Çelebi", "Çengilli", "Darlık", "Değirmençayırı", "Doğancılı", "Erenler", "Esenceli", "Geredeli", "Göçe", "Gökmaslı", "Göksu", "Hacıllı", "Hasanlı", "İmrenli", "İsaköy", "Kabakoz", "Kalem", "Karacaköy", "Karamandere", "Karakiraz", "Kervansaray", "Kızılca", "Kömürlük", "Korucu", "Kurfallı", "Kurna", "Meşrutiyet", "Mutlukent", "Oruçoğlu", "Osmanlı", "Ovacık", "Örcün", "Sahilköy", "Satmazlı", "Sayalar", "Soğullu", "Sortullu", "Şile Merkez", "Teke", "Ulupelit", "Üvezli", "Yazımanayır", "Yaylalı", "Yeniköy"]
+        },
+        {
+          "id": 3435,
+          "name": "Şişli",
+          "neighborhoods": ["19 Mayıs", "Bozkurt", "Cumhuriyet", "Duatepe", "Esentepe", "Eskişehir", "Fulya", "Gülbahar", "Halaskargazi", "Halide Edip Adıvar", "Halil Rıfat Paşa", "Harbiye", "İnönü", "İzzetpaşa", "Kaptanpaşa", "Kuştepe", "Mahmut Şevket Paşa", "Mecidiyeköy", "Merkez", "Meşrutiyet", "Paşa", "Teşvikiye", "Yayla"]
+        },
+        {
+          "id": 3436,
+          "name": "Tuzla",
+          "neighborhoods": ["Anadolu", "Aydınlı", "Aydıntepe", "Cami", "Evliya Çelebi", "Fatih", "Fırat", "İçmeler", "İstasyon", "Mescit", "Mimar Sinan", "Mimarsinan", "Orhanlı", "Postane", "Şifa", "Tepeören", "Yayla"]
+        },
+        {
+          "id": 3437,
+          "name": "Ümraniye",
+          "neighborhoods": ["Altınşehir", "Armağan Evler", "Aşağı Dudullu", "Atatürk", "Atakent", "Adem Yavuz", "Baraj", "Cemil Meriç", "Çakmak", "Çamlık", "Dumlupınar", "Elmalıkent", "Esenevler", "Esenşehir", "Esenkent", "Esensultan", "Fatih Sultan Mehmet", "Feyzullah", "Güngören", "Hekimbaşı", "Huzur", "İmes Sanayi Sitesi", "İnkılap", "İstiklal", "Kazım Karabekir", "Kemal Türkler", "Madenler", "Mehmet Akif", "Mimar Sinan", "Mustafa Kemal", "Namık Kemal", "Necip Fazıl", "Parseller", "Saray", "Sarıgazi", "Site", "Şerifali", "Tatlısu", "Tepe", "Topağacı", "Yamanevler", "Yavuztürk", "Yeni Çamlıca", "Yenidoğan", "Yenisahra", "Yukarı Dudullu"]
+        },
+        {
+          "id": 3438,
+          "name": "Üsküdar",
+          "neighborhoods": ["Acıbadem", "Ahmediye", "Altunizade", "Aziz Mahmut", "Bahçelievler", "Barbaros", "Beylerbeyi", "Bulgurlu", "Burhaniye", "Cumhuriyet", "Çengelköy", "Ferah", "Güzeltepe", "İcadiye", "İmrahor", "Kandilli", "Kısıklı", "Kirazlıtepe", "Kuleli", "Küçük Çamlıca", "Küçüksu", "Küplüce", "Mehmet Akif Ersoy", "Mimar Sinan", "Murat Reis", "Salacak", "Selami Ali", "Selimiye", "Sultantepe", "Toptaşı", "Ünalan", "Valide-i Atik", "Yavuztürk", "Zeynep Kamil"]
+        },
+        {
+          "id": 3439,
+          "name": "Zeytinburnu",
+          "neighborhoods": ["Beştelsiz", "Cirpici", "Gökalp", "Kazlıçeşme", "Maltepe", "Merkezefendi", "Nuripaşa", "Seyitnizam", "Sümer", "Telsiz", "Veliefendi", "Yenidoğan", "Yeşiltepe"]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "Ankara",
+      "districts": [
+        {
+          "id": 601,
+          "name": "Altındağ",
+          "neighborhoods": ["Aktaş", "Alemdağ", "Ali Ersoy", "Araplar", "Atilla", "Aydıncık", "Baraj", "Başpınar", "Battalgazi", "Beşikkaya", "Çamlık", "Çandarlı", "Doğantepe", "Feridun Çelik", "Gökçenefe", "Güneşevler", "Hacılar", "Karacaören", "Karapürçek", "Önder", "Örnek", "Pazar", "Ulubey", "Yıldırım Beyazıt", "Zübeyde Hanım"]
+        },
+        {
+          "id": 602,
+          "name": "Çankaya",
+          "neighborhoods": ["100. Yıl", "Ahlatlıbel", "Alacaatlı", "Angora Evleri", "Aşağı Öveçler", "Ayrancı", "Aziziye", "Bahçelievler", "Barbaros", "Beytepe", "Birlik", "Büyükesat", "Cevizlidere", "Çayyolu", "Çiğdem", "Dikmen", "Emek", "Esatoğlu", "Gaziosmanpaşa", "Güzeltepe", "Harbiye", "Hilal", "İlkbahar", "İmrahor", "İncirli", "İşçi Blokları", "Kavaklıdere", "Keklikpınarı", "Konutkent", "Kültür", "Maltepe", "Metin Akkuş", "Mürsel Uluç", "Mustafa Kemal", "Oğuzlar", "Oran", "Öveçler", "Remzi Oğuz Arık", "Seyranbağları", "Söğütözü", "Şehit Cevdet Özdemir", "Ümitköy", "Yaşamkent", "Yıldızevler", "Yukarı Bahçelievler", "Yukarı Dikmen"]
+        },
+        {
+          "id": 603,
+          "name": "Etimesgut",
+          "neighborhoods": ["30 Ağustos", "Ahıevran", "Alsancak", "Altay", "Aşağı Yurtçu", "Atatürk", "Bağlıca", "Bahçekapı", "Bahçelerüstü", "Ballıkuyumcu", "Başak", "Başkent", "Devlet", "Elvan", "Erler", "Eryaman", "Etiler", "Fatih Sultan", "Göksu", "Güneykent", "Güzelkent", "İstasyon", "Kazım Karabekir", "Kent Koop", "Kuşçağız", "Mehmet Akif Ersoy", "Odunpazarı", "Oğuzlar", "Osmanlı", "Piyade", "Şehit Osman Avcı", "Şeker", "Topçu", "Tunahan", "Türkobası", "Türközü", "Yapracık", "Yaşamkent", "Yenibatı", "Yenikent", "Yukarı Yurtçu"]
+        },
+        {
+          "id": 604,
+          "name": "Keçiören",
+          "neighborhoods": ["19 Mayıs", "Adnan Menderes", "Aktepe", "Aşağı Eğlence", "Atapark", "Ayvalı", "Bağlarbaşı", "Bahçeleriçi", "Basınevler", "Başak", "Çaldıran", "Çiçekli", "Emrah", "Esertepe", "Etlik", "Gökçenefe", "Güçlükaya", "Gülveren", "Güneşevler", "Hasköy", "İncirli", "Kalaba", "Kamil Ocak", "Kanuni", "Karşıyaka", "Kavacık Subayevleri", "Kösrelik", "Kuşcağız", "Meteoroloji", "Osmangazi", "Ovacık", "Pınarbaşı", "Sancaktepe", "Sarıözen", "Şehit Kubilay", "Şenlik", "Tepebaşı", "Ufuktepe", "Uyanış", "Yakacık", "Yayalar", "Yeşilöz", "Yükseltepe"]
+        },
+        {
+          "id": 605,
+          "name": "Mamak",
+          "neighborhoods": ["Akdere", "Araplar", "Atatürk", "Aydın", "Bağlum", "Bahçelerüstü", "Balkiraz", "Başak", "Bayındır", "Boğaziçi", "Büyük Kayaş", "Cengizhan", "Çağlayan", "Demirlibahçe", "Dostlar", "Durali Alıç", "Dutluk", "Ege", "Ekin", "Fahri Korutürk", "General Zeki Doğan", "Gölbaşı", "Gülseren", "Harman", "Hürel", "Kartaltepe", "Kayalar", "Kıbrıs", "Kızılca", "Köstence", "Küçük Kayaş", "Lalahan", "Misket", "Ortaköy", "Saimekadın", "Saray", "Şafaktepe", "Şahap Gürler", "Şahintepe", "Şirintepe", "Tepecik", "Türközü", "Üreğil", "Yatıkmusluk", "Yayla", "Yeşilbayır", "Yunus Emre", "Zirvekent"]
+        },
+        {
+          "id": 606,
+          "name": "Sincan",
+          "neighborhoods": ["Ahmet Haşim", "Akçaören", "Anayurt", "Ankara Sanayi Odası 1. Organize Sanayi", "Atatürk", "Ayvalı", "Başkent Organize Sanayi", "Çaybaşı", "Çimşit", "Erdemkent", "Fatih", "Gazi Mustafa Kemal", "İstasyon", "Lale", "Malazgirt", "Mareşal Çakmak", "Mehmet Akif Ersoy", "Özgürkent", "Plevne", "Saimekadın", "Sakarya", "Saraycık", "Sincan Organize Sanayi", "Tandoğan", "Temelli", "Törekent", "Ulubatlı Hasan", "Yenikent", "Yenimahalle", "Yunus Emre"]
+        },
+        {
+          "id": 607,
+          "name": "Yenimahalle",
+          "neighborhoods": ["2348. Cadde", "Anadolu", "Aşağı Yahyalar", "Ata Sanayi", "Batıkent", "Batı Sitesi", "Beştepe", "Birlik", "Büyük Esat", "Çamlıca", "Çarşı", "Çiçekli", "Demetevler", "Demetgül", "Demetlale", "Deneme", "Devlet", "Emniyet", "Ergazi", "Gayret", "Güventepe", "İlkyerleşim", "İstasyon", "İvedik", "İvedik Organize Sanayi", "Karşıyaka", "Kardelen", "Kentkoop", "Kuzey Yıldızı", "Macun", "Mehmet Akif Ersoy", "Mesut", "Mutlu", "Ostim", "Özevler", "Pamuklar", "Ragıp Tüzün", "Serhat", "Şentepe", "Turgut Özal", "Uzayçağı", "Varlık", "Yakacık", "Yaşamkent", "Yeni Batı", "Yeşilevler", "Yeşiltepe", "Yunus Emre", "Yükseltepe", "Ziraat"]
+        },
+        {
+          "id": 608,
+          "name": "Gölbaşı",
+          "neighborhoods": ["Bahçelievler", "Bezirhane", "Cumhuriyet", "Gaziosmanpaşa", "Karagedik", "Karşıyaka", "Seğmenler", "Şafak", "Zafer"]
+        },
+        {
+          "id": 609,
+          "name": "Pursaklar",
+          "neighborhoods": ["Altınova", "Camikebir", "Cumhuriyet", "Fatih", "Merkez", "Mimar Sinan", "Saray", "Tevfik İleri", "Yunus Emre"]
+        }
+      ]
+    },
+    {
+      "id": 35,
+      "name": "İzmir",
+      "districts": [
+        {
+          "id": 3501,
+          "name": "Aliağa",
+          "neighborhoods": ["Çaltıdere", "Fatih", "Gümüş", "Hacıömerli", "Horozgediği", "Kazımdirik", "Kurtuluş", "Yenişakran", "Yeni", "Siteler"]
+        },
+        {
+          "id": 3502,
+          "name": "Balçova",
+          "neighborhoods": ["Bahçelerarası", "Çetin Emeç", "Eğitim", "Fevzi Çakmak", "İnciraltı", "Korutürk", "Onur", "Teleferik"]
+        },
+        {
+          "id": 3503,
+          "name": "Bayındır",
+          "neighborhoods": ["Akçaköy", "Cumhuriyet", "Fatih", "Muradiye", "Osmaniye", "Sevindik", "Turan", "Vişneli"]
+        },
+        {
+          "id": 3504,
+          "name": "Bayraklı",
+          "neighborhoods": ["Adalet", "Alpaslan", "Bayraklı", "Cengizhan", "Çay", "Doğanay", "Emek", "Fuat Edip Baksı", "Gümüşpala", "İsmet Kaptan", "Manavkuyu", "Mansuroğlu", "Muammer Aksoy", "Naldöken", "Onur", "Osmangazi", "Özkanlar", "Postacılar", "Refet Bele", "Salih Omurtak", "Soğukkuyu", "Tepekule", "Turan", "Yamanlar", "Yeni"]
+        },
+        {
+          "id": 3505,
+          "name": "Bergama",
+          "neighborhoods": ["Atatürk", "Bahçelievler", "Cumhuriyet", "Ertuğrul", "Fatih", "Gazipaşa", "İslamsaray", "Kurtuluş", "Maltepe", "Namık Kemal", "Selçuk", "Turabey", "Ulucami", "Yenibağlar", "Zafer"]
+        },
+        {
+          "id": 3506,
+          "name": "Bornova",
+          "neighborhoods": ["Altındağ", "Ataturk", "Birlik", "Bornova", "Çamdibi", "Çamkule", "Çamiçi", "Doğanlar", "Ergene", "Erzene", "Evka 3", "Evka 4", "Gökçen", "İnönü", "İşıkkent", "Karacaoğlan", "Kazımdirik", "Kemalpaşa", "Kızılay", "Manavkuyu", "Mehmet Akif Ersoy", "Merkez", "Mevlana", "Naldöken", "Osmangazi", "Pınarbaşı", "Rafet Paşa", "Serintepe", "Tınaztepe", "Ufuk", "Yeşilova", "Yunus Emre", "Zafertepe"]
+        },
+        {
+          "id": 3507,
+          "name": "Buca",
+          "neighborhoods": ["9 Eylül", "Adatepe", "Akıncılar", "Atatürk", "Barış", "Buca Koop", "Bucaosb", "Çamlıkule", "Çamlıpınar", "Çevik Bir", "Dicle", "Dokuz Eylül", "Dünya", "Efeler", "Fatih", "Fırat", "Gaziemir", "Göksu", "Gölcük", "Güven", "Hürriyet", "İnönü", "İnkilap", "İstiklal", "Karacaağaç", "Kaynaklar", "Kozağaç", "Kuruçeşme", "Menderes", "Merkez", "Mustafa Kemal", "Seyhan", "Şirinkapı", "Şirinyer", "Ufuk", "Vali Rahmi Bey", "Yaylacık", "Yenigün", "Yıldız", "Zafer"]
+        },
+        {
+          "id": 3508,
+          "name": "Çeşme",
+          "neighborhoods": ["16 Eylül", "Cumhuriyet", "İnönü", "İsmet İnönü", "Musalla", "Sakarya"]
+        },
+        {
+          "id": 3509,
+          "name": "Çiğli",
+          "neighborhoods": ["8000 Evler", "Atatürk", "Aydoğdu", "Balatçık", "Cumhuriyet", "Çağdaş", "Çiğli Atatürk Organize Sanayi", "Esentepe", "Evka 1", "Evka 2", "Evka 5", "Güzeltepe", "Harmandalı", "İstiklal", "Kaklıç", "Köyiçi", "Küçük Çiğli", "Maltepe", "Merkez", "Semikler", "Şirintepe", "Uğur", "Ulukent", "Yeni", "Yeni Harmandalı"]
+        },
+        {
+          "id": 3510,
+          "name": "Dikili",
+          "neighborhoods": ["Barış", "Cumhuriyet", "Deliktaş", "Denizköy", "Gazipaşa", "İsmetpaşa", "Kocatepe", "Salimbey", "Yahşibey"]
+        },
+        {
+          "id": 3511,
+          "name": "Foça",
+          "neighborhoods": ["Atatürk", "Cahit Muhtar Göksay", "Fatih", "Fevzipaşa", "Namık Kemal"]
+        },
+        {
+          "id": 3512,
+          "name": "Gaziemir",
+          "neighborhoods": ["Ali Fuat Erden", "Atıfbey", "Binbaşı Reşatbey", "Dokuz Eylül", "Emrez", "Gazikent", "Gazi", "İbni Sina", "İnönü", "Mehmet Ali Akman", "Memiş Çavuş", "Mustafa Kemal", "Nevvar Salih İşgören", "Özgür", "Teleferik", "Yeşil"]
+        },
+        {
+          "id": 3513,
+          "name": "Güzelbahçe",
+          "neighborhoods": ["Alsancak", "Atatürk", "Çelebi", "Kahramandere", "Kıbrıs Şehitleri", "Maltepe", "Menderes", "Mevlana", "Namık Kemal", "Şafak", "Yalı", "Yeni"]
+        },
+        {
+          "id": 3514,
+          "name": "Karabağlar",
+          "neighborhoods": ["9 Eylül", "Abdi İpekçi", "Adnan Süvari", "Akbaba", "Ali Fuat Cebesoy", "Ali Rıza Efendi", "Arap Hasan", "Bahar", "Bahçelievler", "Basın Sitesi", "Bozyaka", "Cennetçeşme", "Cumhuriyet", "Çavuşoğlu", "Çiçek", "Devrim", "Doğançay", "Ege", "Esenlik", "Esenyalı", "Fahrettin Altay", "General Asım Gündüz", "Göksu", "Gülyaka", "Hatay", "İhsan Alyanak", "İnönü", "Kamil Tunca", "Kılıç Reis", "Kızılçullu", "Limontepe", "Mehmet Ali Akman", "Osman Aksüner", "Özgür", "Peker", "Refet Bele", "Salih Omurtak", "Selvili", "Sevgi", "Şehitler", "Tahsin Şahinkaya", "Umut", "Uzundere", "Vatan", "Yaşar Aksoy", "Yeni", "Yunus Emre", "Yurdoglu"]
+        },
+        {
+          "id": 3515,
+          "name": "Karşıyaka",
+          "neighborhoods": ["Aksoy", "Alaybey", "Atakent", "Bahçelievler", "Bahariye", "Bostanlı", "Cumhuriyet", "Çalıkuşu", "Demirköprü", "Dedebaşı", "Donanmacı", "Fikri Altay", "Goncalar", "Gümüş", "İmbatlı", "İnönü", "Latife Hanım", "Mavişehir", "Nergiz", "Örnekköy", "Postacılar", "Sancaklı", "Şemikler", "Tersane", "Tuna", "Yamanlar", "Yalı", "Zübeyde Hanım"]
+        },
+        {
+          "id": 3516,
+          "name": "Kemalpaşa",
+          "neighborhoods": ["Atatürk", "Cumhuriyet", "Mehmet Akif Ersoy", "Sekiz Eylül", "Ulucak", "Yeni"]
+        },
+        {
+          "id": 3517,
+          "name": "Kınık",
+          "neighborhoods": ["Cumhuriyet", "Erdemli", "Hasanlar", "Yeni"]
+        },
+        {
+          "id": 3518,
+          "name": "Kiraz",
+          "neighborhoods": ["Cumhuriyet", "Fatih", "Umurbey", "Yeni"]
+        },
+        {
+          "id": 3519,
+          "name": "Konak",
+          "neighborhoods": ["19 Mayıs", "Aziziye", "Bahribaba", "Ballıkuyu", "Bozkurt", "Çankaya", "Etiler", "Faik Paşa", "Fatih", "Fevzipaşa", "Göztepe", "Güneş", "Güney", "Güngör", "Hatay", "İsmet Kaptan", "Kadifekale", "Kahramanlar", "Kılıç Reis", "Konak", "Kültür", "Kurtuluş", "Kuruçay", "Mecidiye", "Mersinli", "Mimar Sinan", "Mirali", "Murat", "Murat Reis", "Namık Kemal", "Pazaryeri", "Sakarya", "Selçuk", "Sümer", "Tay", "Tepecik", "Tınaztepe", "Umurbey", "Vezirağa", "Yenice", "Yenidoğan", "Yenişehir", "Zeytinlik"]
+        },
+        {
+          "id": 3520,
+          "name": "Menderes",
+          "neighborhoods": ["Atatürk", "Cumhuriyet", "Gazi Mustafa Kemal", "Görece", "Gümüldür Atatürk", "Gümüldür Cumhuriyet", "Kasımpaşa", "Kemalpaşa", "Namık Kemal", "Seyrek", "Şehitler", "Tekeli", "Yeni"]
+        },
+        {
+          "id": 3521,
+          "name": "Menemen",
+          "neighborhoods": ["Ahıhıdır", "Asarlık", "Atatürk", "Bozköy", "Cumhuriyet", "Çukurçeşme", "Emiralem", "Esatpaşa", "Görece", "Hasanlar", "İnönü", "Kazımpaşa", "Kesikköy", "Kocaçay", "Maltepe", "Musabey", "Seyrek", "Süleymanlı", "Şehit Mustafa Kaymaz", "Tuzçullu", "Ulukent", "Yahşelli", "Yanık", "Zafer"]
+        },
+        {
+          "id": 3522,
+          "name": "Narlıdere",
+          "neighborhoods": ["2. İnönü", "Altıevler", "Atatürk", "Çatalkaya", "Huzur", "İlica", "Limanreis", "Narlı", "Yenikale"]
+        },
+        {
+          "id": 3523,
+          "name": "Ödemiş",
+          "neighborhoods": ["Adahisar", "Anafarta", "Atatürk", "Cumhuriyet", "Devrim", "Hürriyet", "İnönü", "İstiklal", "Kurtuluş", "Mestepe", "Mimar Sinan", "Tulumtaş", "Umurbey", "Üçeylül", "Yeni", "Zafer"]
+        },
+        {
+          "id": 3524,
+          "name": "Seferihisar",
+          "neighborhoods": ["Camikebir", "Cumhuriyet", "Hıdırlık", "Sığacık", "Turabiye", "Ürkmez"]
+        },
+        {
+          "id": 3525,
+          "name": "Selçuk",
+          "neighborhoods": ["14 Mayıs", "Atatürk", "Cumhuriyet", "İsa Bey", "Namık Kemal", "Zafer"]
+        },
+        {
+          "id": 3526,
+          "name": "Tire",
+          "neighborhoods": ["Akıncılar", "Atatürk", "Boğaziçi", "Cumhuriyet", "Fatih", "Gazi Mustafa Kemal", "Kurtuluş", "Necip Fazıl", "Osmanbey", "Topraktepe", "Ümran", "Yavuz Selim", "Yeni", "Yenişehir"]
+        },
+        {
+          "id": 3527,
+          "name": "Torbalı",
+          "neighborhoods": ["Alpkent", "Arslanlar", "Atatürk", "Bahçelievler", "Cumhuriyet", "Çaybaşı", "Ertuğrul", "Fevzi Çakmak", "İstiklal", "Karakızlar", "Kazım Dirik", "Muratbey", "Mustafa Kemal", "Orta", "Şehitler", "Tepeköy", "Vali Rahmi Bey", "Yeni"]
+        },
+        {
+          "id": 3528,
+          "name": "Urla",
+          "neighborhoods": ["Atatürk", "Camikebir", "Cumhuriyet", "Fatih", "İskele", "Kalabak", "Rüstem", "Yeni", "Zafer"]
+        }
+      ]
+    }
+  ]
+}

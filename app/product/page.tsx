@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
-import { Check, Shield, Truck, RefreshCw, Star, Minus, Plus, Share2, Facebook, Twitter } from 'lucide-react'
+import { Check, Shield, Truck, RefreshCw, Minus, Plus } from 'lucide-react'
 import ProductImageZoom from '@/components/ui/ProductImageZoom'
 import { useCart } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'
@@ -88,29 +88,6 @@ export default function ProductPage() {
                 <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
                   Oxiva Mıknatıslı Burun Bandı
                 </h1>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
-                      ))}
-                    </div>
-                    <span className="text-gray-600">(2000+ değerlendirme)</span>
-                  </div>
-                  
-                  {/* Social Share */}
-                  <div className="flex items-center gap-2">
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Share2 className="w-5 h-5 text-gray-600" />
-                    </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Facebook className="w-5 h-5 text-gray-600" />
-                    </button>
-                    <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                      <Twitter className="w-5 h-5 text-gray-600" />
-                    </button>
-                  </div>
-                </div>
               </div>
 
               {/* Price */}
@@ -197,6 +174,18 @@ export default function ProductPage() {
                 >
                   Hemen Satın Al
                 </button>
+
+                <a
+                  href={`https://wa.me/905555555555?text=Merhaba, Oxiva Mıknatıslı Burun Bandı (${quantity} adet) sipariş vermek istiyorum. Toplam tutar: ₺${discountedPrice * quantity}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block w-full bg-green-500 text-white text-center py-4 rounded-full hover:bg-green-600 transition-all transform hover:scale-105 shadow-lg font-semibold text-lg flex items-center justify-center gap-2"
+                >
+                  <svg className="w-8 h-8" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.1.824z"/>
+                  </svg>
+                  WhatsApp ile Sipariş Ver
+                </a>
               </div>
 
               {/* Trust Badges */}
@@ -220,29 +209,31 @@ export default function ProductPage() {
                 <p className="text-sm text-gray-600 mb-3">Güvenli ödeme seçenekleri:</p>
                 <div className="flex items-center gap-4 flex-wrap">
                   {/* Mastercard */}
-                  <div className="bg-gray-100 px-3 py-2 rounded">
-                    <svg className="h-6" viewBox="0 0 48 32" fill="none">
-                      <rect width="48" height="32" rx="4" fill="#EB001B"/>
-                      <rect x="20" width="28" height="32" rx="4" fill="#F79E1B"/>
-                      <path d="M24 22C27.866 22 31 18.866 31 15C31 11.134 27.866 8 24 8C20.134 8 17 11.134 17 15C17 18.866 20.134 22 24 22Z" fill="#FF5F00"/>
-                    </svg>
+                  <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                      alt="Mastercard"
+                      className="h-5 w-auto"
+                    />
                   </div>
                   {/* Visa */}
-                  <div className="bg-gray-100 px-3 py-2 rounded">
-                    <svg className="h-6" viewBox="0 0 48 32" fill="none">
-                      <rect width="48" height="32" rx="4" fill="#1A1F71"/>
-                      <path d="M20 11L16 21H13L17 11H20Z" fill="white"/>
-                      <path d="M21 11L25 21H28L24 11H21Z" fill="white"/>
-                      <path d="M32 11C30 11 29 12 29 13C29 14 30 15 31 15C32 15 33 16 33 17C33 18 32 19 30 19L31 21C34 21 36 19 36 17C36 15 34 14 33 14C32 14 31 13 31 13C31 12 32 11 33 11L32 11Z" fill="white"/>
-                      <path d="M35 11L38 21H41L38 11H35Z" fill="white"/>
-                    </svg>
+                  <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
+                    <img 
+                      src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                      alt="Visa"
+                      className="h-5 w-auto"
+                    />
                   </div>
                   {/* Troy */}
-                  <div className="bg-gray-100 px-3 py-2 rounded">
-                    <span className="text-blue-600 font-bold text-sm">TROY</span>
+                  <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
+                    <img 
+                      src="/images/troy.png"
+                      alt="Troy"
+                      className="h-4 w-auto"
+                    />
                   </div>
                   {/* SSL */}
-                  <div className="bg-gray-100 px-3 py-2 rounded flex items-center gap-1">
+                  <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center gap-1.5 h-12">
                     <Shield className="w-4 h-4 text-green-600" />
                     <span className="text-xs font-medium text-gray-700">256-bit SSL</span>
                   </div>

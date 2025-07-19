@@ -48,7 +48,7 @@ const comparisonData = [
 
 export default function ComparisonSection() {
   return (
-    <section className="py-20 bg-white">
+    <section id="comparison" className="py-20 bg-gray-50">
       <div className="container-max section-padding">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -125,10 +125,10 @@ export default function ComparisonSection() {
               Oxiva ile horlama problemine doğal ve kalıcı çözüm
             </p>
             <Link 
-              href="/checkout"
+              href="/product"
               className="inline-flex items-center bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all transform hover:scale-105 shadow-md font-medium"
             >
-              Hemen Deneyin
+              İncele
             </Link>
           </motion.div>
         </div>

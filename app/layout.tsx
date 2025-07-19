@@ -5,6 +5,7 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import WhatsAppButton from "@/components/ui/WhatsAppButton";
 import { CartProvider } from "@/context/CartContext";
+import InitialLoader from "@/components/ui/InitialLoader";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -31,9 +32,10 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${inter.variable} font-sans antialiased`}>
+        <InitialLoader />
         <CartProvider>
           <Header />
-          <main className="min-h-screen pt-[120px] md:pt-[112px]">
+          <main className="pt-[120px] md:pt-[112px]">
             {children}
           </main>
           <Footer />

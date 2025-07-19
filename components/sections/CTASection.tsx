@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { ArrowRight, Clock, TruckIcon, Shield } from 'lucide-react'
+import { ArrowRight, Clock, TruckIcon, Shield, Star, Package } from 'lucide-react'
 import { motion } from 'framer-motion'
 import { useState, useEffect } from 'react'
 
@@ -59,6 +59,7 @@ export default function CTASection() {
           </p>
 
           <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-4xl mx-auto mb-8">
+            {/* Trust Badges */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
               <div className="flex items-center justify-center">
                 <Clock className="w-6 h-6 mr-2" />
@@ -74,10 +75,24 @@ export default function CTASection() {
               </div>
             </div>
 
-            <div className="text-4xl font-bold mb-2">
-              <span className="line-through opacity-60 text-2xl">₺199</span>{' '}
-              <span className="text-yellow-300">₺159</span>
+            {/* Price */}
+            <div className="text-center mb-8">
+              <div className="flex items-center justify-center gap-2 mb-4">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-5 h-5 text-yellow-300 fill-yellow-300" />
+                ))}
+                <span className="ml-2">4.9/5 (2.847+ değerlendirme)</span>
+              </div>
+              <div className="text-4xl font-bold mb-2">
+                <span className="line-through opacity-60 text-2xl">₺199</span>{' '}
+                <span className="text-yellow-300">₺159</span>
+              </div>
+              <div className="flex items-center justify-center gap-4 text-sm">
+                <span className="bg-yellow-400/20 px-3 py-1 rounded-full">%20 İndirim</span>
+                <span>🔥 Son 47 adet!</span>
+              </div>
             </div>
+            {/* Countdown Timer */}
             <div className="mb-6">
               <p className="text-sm opacity-75 mb-3">Kampanya bitimine kalan süre:</p>
               <div className="flex items-center justify-center gap-3">
@@ -104,17 +119,29 @@ export default function CTASection() {
             </div>
 
             <Link 
-              href="/checkout"
+              href="/product"
               className="inline-flex items-center justify-center bg-white text-primary-600 px-8 py-4 rounded-full hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl font-semibold text-lg"
             >
-              Hemen Satın Al
+              İncele
               <ArrowRight className="w-5 h-5 ml-2" />
             </Link>
           </div>
 
-          <p className="text-sm opacity-75">
-            Stok durumu: <span className="font-semibold text-yellow-300">Son 47 adet!</span>
-          </p>
+          {/* Additional Features */}
+          <div className="flex items-center justify-center gap-8 flex-wrap">
+            <div className="flex items-center">
+              <Package className="w-5 h-5 mr-2 text-yellow-300" />
+              <span className="text-sm">3&apos;lü Paket</span>
+            </div>
+            <div className="flex items-center">
+              <TruckIcon className="w-5 h-5 mr-2 text-yellow-300" />
+              <span className="text-sm">Hızlı Teslimat</span>
+            </div>
+            <div className="flex items-center">
+              <Shield className="w-5 h-5 mr-2 text-yellow-300" />
+              <span className="text-sm">Güvenli Ödeme</span>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

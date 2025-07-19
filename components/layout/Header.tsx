@@ -2,12 +2,15 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-import { Menu, X, Phone } from 'lucide-react'
+import { Menu, X, Phone, Mail } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { useRouter, usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const router = useRouter()
+  const pathname = usePathname()
 
   useEffect(() => {
     const handleScroll = () => {
@@ -18,18 +21,27 @@ export default function Header() {
   }, [])
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    e.preventDefault()
+    
     if (href.startsWith('#')) {
-      e.preventDefault()
-      const element = document.querySelector(href)
-      if (element) {
-        const offset = 100 // Header height offset
-        const elementPosition = element.getBoundingClientRect().top
-        const offsetPosition = elementPosition + window.pageYOffset - offset
-        
-        window.scrollTo({
-          top: offsetPosition,
-          behavior: 'smooth'
-        })
+      const sectionId = href.substring(1)
+      
+      // Ana sayfada değilsek önce ana sayfaya git
+      if (pathname !== '/') {
+        router.push(`/${href}`)
+      } else {
+        // Ana sayfadaysak direkt scroll et
+        const element = document.getElementById(sectionId)
+        if (element) {
+          const offset = 140 // Header height offset
+          const elementPosition = element.getBoundingClientRect().top
+          const offsetPosition = elementPosition + window.pageYOffset - offset
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          })
+        }
       }
       setIsMenuOpen(false)
     }
@@ -43,31 +55,26 @@ export default function Header() {
         <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm border-b border-primary-700/20">
           <div className="container-max section-padding py-2.5">
             <div className="flex items-center justify-between">
-              <div className="hidden lg:flex items-center gap-6">
+              <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
                   <span className="text-white/90">Ücretsiz Kargo</span>
                 </div>
                 <div className="w-px h-4 bg-white/20"></div>
                 <span className="text-white/90">Aynı Gün Kargo</span>
-                <div className="w-px h-4 bg-white/20"></div>
-                <span className="text-white/90">%100 Güvenli Alışveriş</span>
+                <div className="w-px h-4 bg-white/20 hidden md:block"></div>
+                <span className="text-white/90 hidden md:inline">%100 Güvenli Alışveriş</span>
               </div>
               
-              <div className="flex-1 lg:flex-none text-center">
-                <div className="inline-flex items-center gap-2 bg-white/10 px-4 py-1 rounded-full backdrop-blur-sm">
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-yellow-400"></span>
-                  </span>
-                  <span className="font-semibold">%20 İNDİRİM</span>
-                  <span className="text-white/80 text-xs">Sınırlı Süre</span>
+              <div className="flex items-center gap-4">
+                <div className="hidden md:flex items-center gap-2">
+                  <Mail className="w-3.5 h-3.5 text-white/80" />
+                  <span className="text-white/90">info@oxiva.com</span>
                 </div>
-              </div>
-              
-              <div className="hidden lg:flex items-center gap-2">
-                <Phone className="w-3.5 h-3.5 text-white/80" />
-                <span className="text-white/90">0850 XXX XX XX</span>
+                <div className="flex items-center gap-2">
+                  <Phone className="w-3.5 h-3.5 text-white/80" />
+                  <span className="text-white/90">0850 XXX XX XX</span>
+                </div>
               </div>
             </div>
           </div>
@@ -101,14 +108,7 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link 
-                href="/product" 
-                className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
-              >
-                Ürün Detayı
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
-              </Link>
-              <Link 
-                href="#benefits" 
+                href={pathname === '/' ? '#benefits' : '/#benefits'}
                 onClick={(e) => scrollToSection(e, '#benefits')}
                 className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
               >
@@ -116,7 +116,15 @@ export default function Header() {
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link 
-                href="#how-it-works" 
+                href={pathname === '/' ? '#comparison' : '/#comparison'}
+                onClick={(e) => scrollToSection(e, '#comparison')}
+                className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
+              >
+                Neden Oxiva?
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+              </Link>
+              <Link 
+                href={pathname === '/' ? '#how-it-works' : '/#how-it-works'}
                 onClick={(e) => scrollToSection(e, '#how-it-works')}
                 className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
               >
@@ -128,10 +136,10 @@ export default function Header() {
             {/* Desktop Actions */}
             <div className="hidden lg:flex items-center">
               <Link 
-                href="/checkout"
+                href="/product"
                 className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-8 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all transform hover:scale-105 shadow-md font-medium"
               >
-                Hemen Satın Al
+                İncele
               </Link>
             </div>
 
@@ -156,32 +164,32 @@ export default function Header() {
                   Ana Sayfa
                 </Link>
                 <Link 
-                  href="/product" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
-                >
-                  Ürün Detayı
-                </Link>
-                <Link 
-                  href="#benefits" 
+                  href={pathname === '/' ? '#benefits' : '/#benefits'}
                   onClick={(e) => scrollToSection(e, '#benefits')}
                   className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
                 >
                   Faydaları
                 </Link>
                 <Link 
-                  href="#how-it-works" 
+                  href={pathname === '/' ? '#comparison' : '/#comparison'}
+                  onClick={(e) => scrollToSection(e, '#comparison')}
+                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
+                >
+                  Neden Oxiva?
+                </Link>
+                <Link 
+                  href={pathname === '/' ? '#how-it-works' : '/#how-it-works'}
                   onClick={(e) => scrollToSection(e, '#how-it-works')}
                   className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
                 >
                   Nasıl Çalışır?
                 </Link>
                 <Link 
-                  href="/checkout"
+                  href="/product"
                   onClick={() => setIsMenuOpen(false)}
                   className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all text-center font-medium shadow-md"
                 >
-                  Hemen Satın Al
+                  İncele
                 </Link>
               </nav>
             </div>

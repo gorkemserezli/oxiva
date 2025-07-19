@@ -37,7 +37,7 @@ export default function FeaturesSection() {
           className="text-center mb-12"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Neden Oxiva?
+            Oxiva&apos;nın Avantajları
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Patentli mıknatıs teknolojisi ile üretilen burun bandımız, 

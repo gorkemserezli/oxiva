@@ -14,7 +14,7 @@ export default function HeroSection() {
   ]
 
   return (
-    <section className="relative bg-white py-20 lg:py-28 overflow-hidden">
+    <section className="relative bg-white py-8 lg:py-12 overflow-hidden">
       {/* Background decoration */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-20 right-10 w-72 h-72 bg-primary-300 rounded-full blur-3xl"></div>
@@ -56,35 +56,33 @@ export default function HeroSection() {
 
             <div className="flex flex-col sm:flex-row gap-4">
               <Link 
-                href="/checkout"
+                href="/product"
                 className="inline-flex items-center justify-center bg-primary-500 text-white px-8 py-3 rounded-full hover:bg-primary-600 transition-all transform hover:scale-105 shadow-lg"
               >
-                Hemen Satın Al
+                İncele
                 <ArrowRight className="w-5 h-5 ml-2" />
               </Link>
               <Link 
-                href="/product"
+                href="#comparison"
+                onClick={(e) => {
+                  e.preventDefault()
+                  const element = document.getElementById('comparison')
+                  if (element) {
+                    const offset = 140
+                    const elementPosition = element.getBoundingClientRect().top
+                    const offsetPosition = elementPosition + window.pageYOffset - offset
+                    window.scrollTo({
+                      top: offsetPosition,
+                      behavior: 'smooth'
+                    })
+                  }
+                }}
                 className="inline-flex items-center justify-center border-2 border-primary-500 text-primary-500 px-8 py-3 rounded-full hover:bg-primary-50 transition-colors"
               >
-                Ürün Detayları
+                Neden Oxiva?
               </Link>
             </div>
 
-            <div className="mt-8 flex items-center gap-8">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div 
-                    key={i}
-                    className="w-10 h-10 rounded-full bg-gray-300 border-2 border-white"
-                  />
-                ))}
-              </div>
-              <div>
-                <p className="text-sm text-gray-600">
-                  <span className="font-bold text-gray-900">1000+</span> mutlu müşteri
-                </p>
-              </div>
-            </div>
           </motion.div>
 
           {/* Image */}

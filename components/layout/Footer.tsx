@@ -6,7 +6,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="bg-gray-50 mt-20">
+    <footer className="bg-gray-50">
       {/* Trust Badges */}
       <div className="border-t border-gray-200">
         <div className="container-max section-padding py-8">
@@ -41,13 +41,15 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             {/* Logo & Description */}
             <div className="md:col-span-1">
-              <Image
-                src="/images/logo.png"
-                alt="Oxiva Logo"
-                width={120}
-                height={40}
-                className="h-10 w-auto mb-4 brightness-0 invert"
-              />
+              <div className="bg-white rounded-lg p-2 inline-block mb-4">
+                <Image
+                  src="/images/logo.png"
+                  alt="Oxiva Logo"
+                  width={120}
+                  height={40}
+                  className="h-10 w-auto"
+                />
+              </div>
               <p className="text-sm text-gray-300">
                 Mıknatıslı burun bandı ile rahat nefes alın, horlama sorununa son verin.
               </p>
