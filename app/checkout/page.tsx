@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { useCart } from '@/context/CartContext'
-import { ChevronLeft, Lock, CreditCard as CreditCardIcon, Truck, Shield, CheckCircle, AlertCircle, Loader2, Tag, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Lock, CreditCard as CreditCardIcon, Truck, Shield, CheckCircle, AlertCircle, Loader2, Tag, X } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { addressService, type City, type District } from '@/utils/addressService'
@@ -456,11 +456,30 @@ export default function CheckoutPage() {
           Ürüne Geri Dön
         </Link>
 
+        {/* Mobile Order Summary Toggle */}
+        <div className="lg:hidden mb-4 sticky top-[88px] z-10 bg-gray-50 -mx-4 px-4 py-3">
+          <div className="bg-white rounded-lg shadow-sm p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-xs text-gray-600">Toplam Tutar</p>
+                <p className="text-xl font-bold text-primary-600">₺{total.toFixed(2)}</p>
+              </div>
+              <a
+                href="#mobile-order-summary"
+                className="flex items-center gap-1 text-primary-600 hover:text-primary-700"
+              >
+                <span className="text-sm font-medium">Detaylar</span>
+                <ChevronRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
+        </div>
+
         <div className="grid lg:grid-cols-3 gap-8">
           {/* Left Column - Form */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 order-2 lg:order-1">
             {/* Steps */}
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-6">
+            <div className="bg-white rounded-xl shadow-sm p-4 lg:p-8 mb-6">
               <div className="relative">
                 {/* Progress Line */}
                 <div className="absolute left-0 top-1/2 w-full h-1 bg-gray-200 -translate-y-1/2" />
@@ -512,15 +531,16 @@ export default function CheckoutPage() {
                             }`} />
                           )}
                         </motion.div>
-                        <div className="mt-3 text-center">
-                          <div className={`text-sm font-semibold ${
+                        <div className="mt-2 lg:mt-3 text-center">
+                          <div className={`text-xs lg:text-sm font-semibold ${
                             isActive || isCompleted ? 'text-gray-900' : 'text-gray-500'
                           }`}>
-                            Adım {step.id}
+                            <span className="hidden lg:inline">Adım {step.id}</span>
+                            <span className="lg:hidden">{step.id}</span>
                           </div>
-                          <div className={`text-xs mt-1 ${
+                          <div className={`text-xs mt-0.5 lg:mt-1 ${
                             isActive || isCompleted ? 'text-gray-700' : 'text-gray-400'
-                          }`}>
+                          } hidden sm:block`}>
                             {step.name}
                           </div>
                         </div>
@@ -532,7 +552,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* Form Content */}
-            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-6">
+            <form onSubmit={handleSubmit} className="bg-white rounded-xl shadow-sm p-4 lg:p-6">
               {/* General Error Message */}
               {errors.general && (
                 <motion.div
@@ -1229,8 +1249,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column - Order Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-xl shadow-sm p-6 sticky top-32">
+          <div className="lg:col-span-1 order-1 lg:order-2">
+            <div id="mobile-order-summary" className="bg-white rounded-xl shadow-sm p-4 lg:p-6 lg:sticky lg:top-32">
               <h3 className="text-lg font-semibold mb-4">Sipariş Özeti</h3>
               
               {/* Product */}
