@@ -52,7 +52,7 @@ export default function AboutPage() {
                   teknolojisi ile üretilen ürünümüz, binlerce kullanıcının onayını aldı.
                 </p>
                 <p>
-                  Bugün, Türkiye'nin dört bir yanındaki müşterilerimize hizmet vermekten 
+                  Bugün, Türkiye&apos;nin dört bir yanındaki müşterilerimize hizmet vermekten 
                   ve onların daha kaliteli uyumalarına yardımcı olmaktan gurur duyuyoruz.
                 </p>
               </div>
@@ -107,7 +107,7 @@ export default function AboutPage() {
               </div>
               <h3 className="text-xl font-bold text-gray-900 mb-3">Vizyonumuz</h3>
               <p className="text-gray-600">
-                Uyku sağlığı alanında Türkiye'nin lider markası olmak ve 
+                Uyku sağlığı alanında Türkiye&apos;nin lider markası olmak ve 
                 dünyaya açılmak.
               </p>
             </motion.div>

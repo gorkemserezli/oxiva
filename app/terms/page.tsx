@@ -106,7 +106,7 @@ export default function TermsPage() {
             <h2 className="text-2xl font-bold text-gray-900 mb-4">7. Fikri Mülkiyet Hakları</h2>
             <p className="text-gray-600 mb-6">
               Web sitemizde yer alan tüm içerikler (yazılar, görseller, logo, tasarım) 
-              Oxiva'ya aittir ve telif hakları ile korunmaktadır. İzinsiz kullanım, 
+              Oxiva&apos;ya aittir ve telif hakları ile korunmaktadır. İzinsiz kullanım, 
               kopyalama veya dağıtım yasaktır.
             </p>
 

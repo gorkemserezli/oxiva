@@ -114,8 +114,8 @@ export const validateTaxNumber = (taxNo: string): boolean => {
   const digits = taxNo.split('').map(Number);
   
   // Calculate check digit
-  let v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0, v8 = 0, v9 = 0;
-  let lastDigit = digits[9];
+  let v1 = 0, v2 = 0, v3 = 0, v4 = 0, v5 = 0, v6 = 0, v7 = 0;
+  const lastDigit = digits[9];
   
   for (let i = 0; i < 9; i++) {
     const temp = (digits[i] + (9 - i)) % 10;

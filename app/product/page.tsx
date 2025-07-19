@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { motion } from 'framer-motion'
 import { Check, Shield, Truck, RefreshCw, Minus, Plus } from 'lucide-react'
 import ProductImageZoom from '@/components/ui/ProductImageZoom'
@@ -210,25 +211,31 @@ export default function ProductPage() {
                 <div className="flex items-center gap-4 flex-wrap">
                   {/* Mastercard */}
                   <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
-                    <img 
+                    <Image 
                       src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
                       alt="Mastercard"
+                      width={80}
+                      height={20}
                       className="h-5 w-auto"
                     />
                   </div>
                   {/* Visa */}
                   <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
-                    <img 
+                    <Image 
                       src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
                       alt="Visa"
+                      width={80}
+                      height={20}
                       className="h-5 w-auto"
                     />
                   </div>
                   {/* Troy */}
                   <div className="bg-white px-4 py-3 rounded border border-gray-200 flex items-center h-12">
-                    <img 
+                    <Image 
                       src="/images/troy.png"
                       alt="Troy"
+                      width={64}
+                      height={16}
                       className="h-4 w-auto"
                     />
                   </div>

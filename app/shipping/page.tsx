@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Truck, Package, Clock, MapPin, Shield, CheckCircle } from 'lucide-react'
+import { Truck, Clock, Shield, CheckCircle } from 'lucide-react'
 
 export default function ShippingPage() {
   return (
@@ -183,7 +183,7 @@ export default function ShippingPage() {
                 <div>
                   <h4 className="font-semibold text-gray-900 mb-2">Önemli Notlar</h4>
                   <ul className="space-y-2 text-gray-600">
-                    <li>• Hafta içi 16:00'ya kadar verilen siparişler aynı gün kargoya verilir.</li>
+                    <li>• Hafta içi 16:00&apos;ya kadar verilen siparişler aynı gün kargoya verilir.</li>
                     <li>• Cumartesi günü verilen siparişler pazartesi kargoya verilir.</li>
                     <li>• Resmi tatillerde kargo hizmeti bulunmamaktadır.</li>
                   </ul>

@@ -403,7 +403,7 @@ export default function CheckoutPage() {
       
       // Başarılı ödeme sonrası yönlendirme
       router.push('/success')
-    } catch (error) {
+    } catch {
       setErrors({ general: 'Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.' })
       setIsProcessing(false)
     }
@@ -475,7 +475,6 @@ export default function CheckoutPage() {
                 {/* Steps */}
                 <div className="relative flex justify-between">
                   {steps.map((step) => {
-                    const Icon = step.icon
                     const isActive = activeStep === step.id
                     const isCompleted = activeStep > step.id
                     
@@ -1154,41 +1153,51 @@ export default function CheckoutPage() {
                     <div className="flex justify-center items-center gap-3 flex-wrap">
                       {/* Mastercard */}
                       <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <img 
+                        <Image 
                           src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
                           alt="Mastercard"
+                          width={64}
+                          height={16}
                           className="h-4 w-auto"
                         />
                       </div>
                       {/* Visa */}
                       <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <img 
+                        <Image 
                           src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
                           alt="Visa"
+                          width={64}
+                          height={16}
                           className="h-4 w-auto"
                         />
                       </div>
                       {/* Troy */}
                       <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <img 
+                        <Image 
                           src="/images/troy.png"
                           alt="Troy"
+                          width={48}
+                          height={12}
                           className="h-3 w-auto"
                         />
                       </div>
                       {/* AMEX */}
                       <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <img 
+                        <Image 
                           src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
                           alt="American Express"
+                          width={64}
+                          height={20}
                           className="h-5 w-auto"
                         />
                       </div>
                       {/* Maestro */}
                       <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <img 
+                        <Image 
                           src="https://upload.wikimedia.org/wikipedia/commons/8/80/Maestro_2016.svg"
                           alt="Maestro"
+                          width={64}
+                          height={20}
                           className="h-5 w-auto"
                         />
                       </div>
