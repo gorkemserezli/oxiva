@@ -233,14 +233,25 @@ export default function Header() {
               >
                 Nasıl Çalışır?
               </Link>
-              <div className="px-6 pt-4 pb-2">
-                <Link 
-                  href="/product"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="block w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all text-center font-medium shadow-md"
-                >
-                  İncele
-                </Link>
+              
+              {/* Contact Info */}
+              <div className="border-t border-gray-100 mt-4 pt-4 px-6">
+                <div className="space-y-3">
+                  <a 
+                    href="mailto:info@oxiva.com"
+                    className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
+                  >
+                    <Mail className="w-4 h-4" />
+                    <span className="text-sm">info@oxiva.com</span>
+                  </a>
+                  <a 
+                    href="tel:0850XXXXXXX"
+                    className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
+                  >
+                    <Phone className="w-4 h-4" />
+                    <span className="text-sm">0850 XXX XX XX</span>
+                  </a>
+                </div>
               </div>
             </nav>
           </div>
