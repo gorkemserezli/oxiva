@@ -51,29 +51,53 @@ export default function Header() {
     <>
       {/* Main Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
-        {/* Top Bar - Desktop Only */}
-        <div className="hidden md:block bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm border-b border-primary-700/20">
-          <div className="container-max section-padding py-2.5">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center gap-6">
-                <div className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
-                  <span className="text-white/90">Ücretsiz Kargo</span>
+        {/* Top Bar */}
+        <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white border-b border-primary-700/20">
+          {/* Mobile Version */}
+          <div className="md:hidden">
+            <div className="container-max section-padding py-2">
+              <div className="flex items-center justify-center gap-1 text-xs">
+                <div className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  <span className="font-medium">Ücretsiz Kargo</span>
                 </div>
-                <div className="w-px h-4 bg-white/20"></div>
-                <span className="text-white/90">Aynı Gün Kargo</span>
-                <div className="w-px h-4 bg-white/20"></div>
-                <span className="text-white/90">%100 Güvenli Alışveriş</span>
+                <span className="mx-2 opacity-40">•</span>
+                <div className="flex items-center gap-1">
+                  <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                  <span className="font-medium">Hızlı Teslimat</span>
+                </div>
               </div>
-              
-              <div className="flex items-center gap-4">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-3.5 h-3.5 text-white/80" />
-                  <span className="text-white/90">info@oxiva.com</span>
+            </div>
+          </div>
+          
+          {/* Desktop Version */}
+          <div className="hidden md:block">
+            <div className="container-max section-padding py-2.5">
+              <div className="flex items-center justify-between text-sm">
+                <div className="flex items-center gap-6">
+                  <div className="flex items-center gap-2">
+                    <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
+                    <span className="text-white/90">Ücretsiz Kargo</span>
+                  </div>
+                  <div className="w-px h-4 bg-white/20"></div>
+                  <span className="text-white/90">Aynı Gün Kargo</span>
+                  <div className="w-px h-4 bg-white/20"></div>
+                  <span className="text-white/90">%100 Güvenli Alışveriş</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <Phone className="w-3.5 h-3.5 text-white/80" />
-                  <span className="text-white/90">0850 XXX XX XX</span>
+                
+                <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-2">
+                    <Mail className="w-3.5 h-3.5 text-white/80" />
+                    <span className="text-white/90">info@oxiva.com</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Phone className="w-3.5 h-3.5 text-white/80" />
+                    <span className="text-white/90">0850 XXX XX XX</span>
+                  </div>
                 </div>
               </div>
             </div>
