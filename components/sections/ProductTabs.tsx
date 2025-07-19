@@ -162,7 +162,7 @@ export default function ProductTabs() {
               {tabs.map((tab) => (
                 <button
                   key={tab.id}
-                  ref={(el) => (tabRefs.current[tab.id] = el)}
+                  ref={(el) => { tabRefs.current[tab.id] = el }}
                   onClick={() => setActiveTab(tab.id)}
                   className={`px-4 sm:px-6 py-3 font-medium transition-all relative whitespace-nowrap flex-shrink-0 ${
                     activeTab === tab.id

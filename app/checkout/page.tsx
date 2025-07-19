@@ -21,6 +21,7 @@ import {
   validationMessages 
 } from '@/utils/validation'
 import CreditCard from '@/components/CreditCard'
+import PayTRIframe from '@/components/PayTRIframe'
 
 interface FormData {
   // Kişisel Bilgiler
@@ -67,6 +68,8 @@ export default function CheckoutPage() {
   const [isCardFlipped, setIsCardFlipped] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
   const [showMobileOrderSummary, setShowMobileOrderSummary] = useState(false)
+  const [paytrToken, setPaytrToken] = useState('')
+  const [showPaytrIframe, setShowPaytrIframe] = useState(false)
   
   // Address data states
   const [cities, setCities] = useState<City[]>([])
@@ -394,19 +397,53 @@ export default function CheckoutPage() {
       // Save form to localStorage
       localStorage.setItem('lastCheckoutData', JSON.stringify(formData))
       
-      // Simulate payment processing
-      await new Promise(resolve => setTimeout(resolve, 2000))
+      // Get city and district names
+      const cityName = cities.find(c => c.id === parseInt(formData.city))?.name || ''
+      const districtName = districts.find(d => d.id === parseInt(formData.district))?.name || ''
       
-      // Burada gerçek ödeme API'si çağrılacak
-      console.log('Form submitted:', formData)
+      // Prepare order data for PayTR
+      const orderData = {
+        email: formData.email,
+        payment_amount: Math.round(total * 100), // PayTR expects amount in kuruş
+        user_name: `${formData.firstName} ${formData.lastName}`,
+        user_address: `${formData.address} ${districtName} ${cityName}`,
+        user_phone: formData.phone,
+        merchant_oid: `OX_${Date.now()}`, // Unique order ID
+        user_basket: JSON.stringify([
+          ['Oxiva Mıknatıslı Burun Bandı', `${discountedPrice.toFixed(2)}`, quantity]
+        ]),
+        debug_on: process.env.NODE_ENV === 'development' ? 1 : 0,
+        test_mode: 1, // Set to 0 for production
+        no_installment: 0,
+        max_installment: 0,
+        lang: 'tr'
+      }
       
-      // Clear saved form data on success
-      localStorage.removeItem('checkoutFormData')
+      // Call PayTR API
+      const response = await fetch('/api/payment/paytr', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+      })
       
-      // Başarılı ödeme sonrası yönlendirme
-      router.push('/success')
-    } catch {
-      setErrors({ general: 'Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.' })
+      const result = await response.json()
+      
+      if (result.status === 'success' && result.token) {
+        // Save order ID for later use
+        localStorage.setItem('currentOrderId', orderData.merchant_oid)
+        
+        // Show PayTR iframe
+        setPaytrToken(result.token)
+        setShowPaytrIframe(true)
+      } else {
+        throw new Error(result.reason || 'Ödeme başlatılamadı')
+      }
+    } catch (error) {
+      console.error('Payment error:', error)
+      setErrors({ general: error instanceof Error ? error.message : 'Ödeme işlemi sırasında bir hata oluştu. Lütfen tekrar deneyin.' })
+    } finally {
       setIsProcessing(false)
     }
   }
@@ -1529,6 +1566,24 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
+      
+      {/* PayTR Iframe */}
+      {showPaytrIframe && (
+        <PayTRIframe 
+          token={paytrToken}
+          onClose={() => {
+            setShowPaytrIframe(false)
+            setPaytrToken('')
+            // Check if payment was successful
+            const orderId = localStorage.getItem('currentOrderId')
+            if (orderId) {
+              // User might have completed payment, redirect to appropriate page
+              // In a real app, you'd check the payment status from your backend
+              router.push('/') // Redirect to home for now
+            }
+          }}
+        />
+      )}
     </div>
   )
 }

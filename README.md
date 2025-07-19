@@ -1,125 +1,114 @@
-# Oxiva Store - Mıknatıslı Burun Bandı E-Ticaret Sitesi
+# Oxiva Store - E-Commerce Website
 
-Modern ve kullanıcı dostu tek ürün satış sitesi. Next.js 15, TypeScript ve Tailwind CSS ile geliştirilmiştir.
+Modern ve güvenli bir e-ticaret sitesi. Next.js 15, TypeScript ve Tailwind CSS ile geliştirilmiştir.
 
-## 🚀 Özellikler
+## Özellikler
 
-- ✅ Modern ve responsive tasarım
-- ✅ SEO optimizasyonu
-- ✅ Hızlı yükleme süreleri
-- ✅ Güvenli ödeme altyapısı
-- ✅ WhatsApp entegrasyonu
-- ✅ Dinamik fiyatlandırma
-- ✅ Stok takibi
-- ✅ Ürün zoom özelliği
+- 🛒 Modern e-ticaret deneyimi
+- 💳 PayTR ödeme gateway entegrasyonu
+- 📱 Tam responsive tasarım
+- 🔒 Güvenli ödeme altyapısı
+- 🚀 Yüksek performans
+- 📦 Ürün yönetimi
+- 🎨 Modern UI/UX
 
-## 🛠️ Teknolojiler
+## Kurulum
 
-- **Framework:** Next.js 15 (App Router)
-- **Dil:** TypeScript
-- **Styling:** Tailwind CSS
-- **Animasyonlar:** Framer Motion
-- **İkonlar:** Lucide React
-- **State Management:** React Context API
+### Gereksinimler
 
-## 📦 Kurulum
+- Node.js 18+ 
+- npm veya yarn
 
+### Adımlar
+
+1. Projeyi klonlayın:
 ```bash
-# Projeyi klonlayın
-git clone https://github.com/[kullanıcı-adı]/oxiva-store.git
-
-# Proje klasörüne girin
+git clone [repo-url]
 cd oxiva-store
+```
 
-# Bağımlılıkları yükleyin
+2. Bağımlılıkları yükleyin:
+```bash
 npm install
+```
 
-# Geliştirme sunucusunu başlatın
+3. Çevre değişkenlerini ayarlayın:
+```bash
+cp .env.local.example .env.local
+```
+
+4. `.env.local` dosyasını düzenleyin:
+```env
+# PayTR API Credentials
+PAYTR_MERCHANT_ID=your_merchant_id
+PAYTR_MERCHANT_KEY=your_merchant_key
+PAYTR_MERCHANT_SALT=your_merchant_salt
+
+# Site URLs
+NEXT_PUBLIC_SITE_URL=https://yourdomain.com
+```
+
+## Geliştirme
+
+Geliştirme sunucusunu başlatın:
+```bash
 npm run dev
 ```
 
-Uygulama [http://localhost:3000](http://localhost:3000) adresinde çalışacaktır.
+Tarayıcıda [http://localhost:3000](http://localhost:3000) adresini açın.
 
-## 📁 Proje Yapısı
+## Production Build
 
-```
-oxiva-store/
-├── app/                    # Next.js app router
-│   ├── layout.tsx         # Ana layout
-│   ├── page.tsx           # Ana sayfa
-│   ├── product/           # Ürün detay sayfası
-│   ├── checkout/          # Ödeme sayfası
-│   └── success/           # Başarılı sipariş sayfası
-├── components/            # React componentleri
-│   ├── layout/           # Header, Footer
-│   ├── sections/         # Sayfa bölümleri
-│   └── ui/              # UI componentleri
-├── context/              # React Context
-├── public/               # Statik dosyalar
-└── styles/               # Global stiller
-```
-
-## 🎨 Özelleştirme
-
-### Renkler
-Renkleri `tailwind.config.ts` dosyasından özelleştirebilirsiniz:
-
-```javascript
-colors: {
-  primary: {
-    500: '#2C4E70', // Ana renk
-  },
-  accent: {
-    500: '#5BA4D3', // Vurgu rengi
-  }
-}
-```
-
-### İletişim Bilgileri
-WhatsApp numarasını ve diğer iletişim bilgilerini ilgili component'lerde güncelleyin.
-
-## 🚀 Deployment
-
-### Vercel ile Deploy
-
+1. Production build oluşturun:
 ```bash
 npm run build
-vercel --prod
 ```
 
-### Manuel Build
-
+2. Production sunucusunu başlatın:
 ```bash
-npm run build
 npm start
 ```
 
-## 📝 Yapılacaklar
+## Deployment
 
-- [ ] Gerçek ödeme gateway entegrasyonu
-- [ ] Email bildirimleri
-- [ ] Admin paneli
-- [ ] Çoklu dil desteği
-- [ ] Ürün varyantları
+### Vercel (Önerilen)
 
-## 🤝 Katkıda Bulunma
+1. [Vercel](https://vercel.com) hesabı oluşturun
+2. GitHub reposunu Vercel'e bağlayın
+3. Çevre değişkenlerini Vercel dashboard'dan ekleyin
+4. Deploy edin
 
-1. Bu projeyi fork edin
-2. Feature branch oluşturun (`git checkout -b feature/amazing-feature`)
-3. Değişikliklerinizi commit edin (`git commit -m 'Add some amazing feature'`)
-4. Branch'inizi push edin (`git push origin feature/amazing-feature`)
-5. Pull Request açın
+### Manuel Deployment
 
-## 📄 Lisans
+1. Build oluşturun:
+```bash
+npm run build
+```
 
-Bu proje MIT lisansı ile lisanslanmıştır.
+2. `.next`, `public`, `package.json` ve `node_modules` klasörlerini sunucuya yükleyin
 
-## 📞 İletişim
+3. PM2 ile çalıştırın:
+```bash
+npm install -g pm2
+pm2 start npm --name "oxiva-store" -- start
+```
 
-- Website: [oxiva.com](https://oxiva.com)
-- Email: info@oxiva.com
-- WhatsApp: +90 5XX XXX XX XX
+## PayTR Entegrasyonu
 
----
+1. [PayTR](https://www.paytr.com) hesabı oluşturun
+2. Merchant bilgilerinizi alın
+3. PayTR panelinden callback URL'lerini ayarlayın:
+   - Success URL: `https://yourdomain.com/payment/success`
+   - Fail URL: `https://yourdomain.com/payment/fail`
+   - Callback URL: `https://yourdomain.com/api/payment/callback`
 
-💙 [Oxiva](https://oxiva.com) tarafından geliştirilmiştir.
+## Güvenlik
+
+- Tüm hassas bilgiler çevre değişkenlerinde saklanır
+- HTTPS kullanımı zorunludur
+- PayTR hash doğrulaması yapılır
+- Input validasyonları mevcuttur
+
+## Lisans
+
+Tüm hakları saklıdır.
