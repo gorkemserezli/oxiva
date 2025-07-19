@@ -20,6 +20,19 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Lock body scroll when mobile menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    
+    return () => {
+      document.body.style.overflow = ''
+    }
+  }, [isMenuOpen])
+
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault()
     
@@ -176,51 +189,63 @@ export default function Header() {
             </button>
           </div>
 
-          {/* Mobile Menu */}
-          {isMenuOpen && (
-            <div className="lg:hidden py-6 border-t border-gray-200 animate-fade-in">
-              <nav className="flex flex-col space-y-4">
-                <Link 
-                  href="/" 
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
-                >
-                  Ana Sayfa
-                </Link>
-                <Link 
-                  href={pathname === '/' ? '#benefits' : '/#benefits'}
-                  onClick={(e) => scrollToSection(e, '#benefits')}
-                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
-                >
-                  Faydaları
-                </Link>
-                <Link 
-                  href={pathname === '/' ? '#comparison' : '/#comparison'}
-                  onClick={(e) => scrollToSection(e, '#comparison')}
-                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
-                >
-                  Neden Oxiva?
-                </Link>
-                <Link 
-                  href={pathname === '/' ? '#how-it-works' : '/#how-it-works'}
-                  onClick={(e) => scrollToSection(e, '#how-it-works')}
-                  className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-4 py-2 hover:bg-gray-50 rounded-lg"
-                >
-                  Nasıl Çalışır?
-                </Link>
-                <Link 
-                  href="/product"
-                  onClick={() => setIsMenuOpen(false)}
-                  className="bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all text-center font-medium shadow-md"
-                >
-                  İncele
-                </Link>
-              </nav>
-            </div>
-          )}
         </div>
         </div>
       </header>
+
+      {/* Mobile Menu Overlay */}
+      {isMenuOpen && (
+        <>
+          {/* Dark overlay */}
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
+            onClick={() => setIsMenuOpen(false)}
+          />
+          
+          {/* Mobile Menu */}
+          <div className="fixed top-[100px] left-0 right-0 bg-white z-50 lg:hidden shadow-xl">
+            <nav className="flex flex-col py-6">
+              <Link 
+                href="/" 
+                onClick={() => setIsMenuOpen(false)}
+                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+              >
+                Ana Sayfa
+              </Link>
+              <Link 
+                href={pathname === '/' ? '#benefits' : '/#benefits'}
+                onClick={(e) => scrollToSection(e, '#benefits')}
+                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+              >
+                Faydaları
+              </Link>
+              <Link 
+                href={pathname === '/' ? '#comparison' : '/#comparison'}
+                onClick={(e) => scrollToSection(e, '#comparison')}
+                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+              >
+                Neden Oxiva?
+              </Link>
+              <Link 
+                href={pathname === '/' ? '#how-it-works' : '/#how-it-works'}
+                onClick={(e) => scrollToSection(e, '#how-it-works')}
+                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+              >
+                Nasıl Çalışır?
+              </Link>
+              <div className="px-6 pt-4 pb-2">
+                <Link 
+                  href="/product"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all text-center font-medium shadow-md"
+                >
+                  İncele
+                </Link>
+              </div>
+            </nav>
+          </div>
+        </>
+      )}
     </>
   )
 }
