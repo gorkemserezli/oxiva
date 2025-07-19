@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion } from 'framer-motion'
+import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/context/CartContext'
 import { ChevronLeft, ChevronRight, Lock, CreditCard as CreditCardIcon, Truck, Shield, CheckCircle, AlertCircle, Loader2, Tag, X } from 'lucide-react'
 import Link from 'next/link'
@@ -66,6 +66,7 @@ export default function CheckoutPage() {
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isCardFlipped, setIsCardFlipped] = useState(false)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [showMobileOrderSummary, setShowMobileOrderSummary] = useState(false)
   
   // Address data states
   const [cities, setCities] = useState<City[]>([])
@@ -464,13 +465,14 @@ export default function CheckoutPage() {
                 <p className="text-xs text-gray-600">Toplam Tutar</p>
                 <p className="text-xl font-bold text-primary-600">₺{total.toFixed(2)}</p>
               </div>
-              <a
-                href="#mobile-order-summary"
+              <button
+                type="button"
+                onClick={() => setShowMobileOrderSummary(!showMobileOrderSummary)}
                 className="flex items-center gap-1 text-primary-600 hover:text-primary-700"
               >
                 <span className="text-sm font-medium">Detaylar</span>
-                <ChevronRight className="w-4 h-4" />
-              </a>
+                <ChevronRight className={`w-4 h-4 transition-transform ${showMobileOrderSummary ? 'rotate-90' : ''}`} />
+              </button>
             </div>
           </div>
         </div>
@@ -1249,8 +1251,8 @@ export default function CheckoutPage() {
           </div>
 
           {/* Right Column - Order Summary */}
-          <div className="lg:col-span-1 order-1 lg:order-2">
-            <div id="mobile-order-summary" className="bg-white rounded-xl shadow-sm p-4 lg:p-6 lg:sticky lg:top-32">
+          <div className={`lg:col-span-1 order-1 lg:order-2 ${showMobileOrderSummary ? 'block lg:block' : 'hidden lg:block'}`}>
+                <div id="mobile-order-summary" className="bg-white rounded-xl shadow-sm p-4 lg:p-6 lg:sticky lg:top-32">
               <h3 className="text-lg font-semibold mb-4">Sipariş Özeti</h3>
               
               {/* Product */}
