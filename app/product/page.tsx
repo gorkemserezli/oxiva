@@ -33,9 +33,9 @@ export default function ProductPage() {
 
   const handleQuantityChange = (action: 'increase' | 'decrease') => {
     if (action === 'increase') {
-      setQuantity(prev => prev + 1)
+      setQuantity((prev: number) => prev + 1)
     } else if (action === 'decrease' && quantity > 1) {
-      setQuantity(prev => prev - 1)
+      setQuantity((prev: number) => prev - 1)
     }
   }
 
