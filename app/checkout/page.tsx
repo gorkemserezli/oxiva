@@ -357,6 +357,8 @@ export default function CheckoutPage() {
     if (activeStep === 1) {
       if (validateStep1()) {
         setActiveStep(2)
+        // Scroll to top when moving to next step
+        window.scrollTo({ top: 0, behavior: 'smooth' })
       }
     }
   }
@@ -364,6 +366,8 @@ export default function CheckoutPage() {
   const handlePrevStep = () => {
     if (activeStep > 1) {
       setActiveStep(activeStep - 1)
+      // Scroll to top when moving to previous step
+      window.scrollTo({ top: 0, behavior: 'smooth' })
     }
   }
 
