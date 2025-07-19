@@ -129,7 +129,7 @@ export default function CheckoutPage() {
   // Save form data to localStorage on change
   useEffect(() => {
     const timeoutId = setTimeout(() => {
-      const { cardNumber, cvv, expiryDate, ...dataToSave } = formData
+      const { cardNumber: _, cvv: __, expiryDate: ___, ...dataToSave } = formData
       localStorage.setItem('checkoutFormData', JSON.stringify(dataToSave))
     }, 1000)
     

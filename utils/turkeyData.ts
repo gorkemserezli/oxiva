@@ -275,4 +275,4 @@ export const turkeyDataService = {
 };
 
 // For use in API routes
-export { City, District };
+export type { City, District };
