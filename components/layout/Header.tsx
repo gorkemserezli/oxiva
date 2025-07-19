@@ -122,7 +122,7 @@ export default function Header() {
           isScrolled ? 'shadow-lg' : 'shadow-sm'
         }`}>
         <div className="container-max section-padding">
-          <div className="flex items-center justify-between h-20">
+          <div className="flex items-center justify-between h-16 md:h-20">
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
@@ -130,7 +130,7 @@ export default function Header() {
                 alt="Oxiva Logo"
                 width={140}
                 height={46}
-                className="h-12 w-auto"
+                className="h-10 md:h-12 w-auto"
                 priority
               />
             </Link>
@@ -203,7 +203,7 @@ export default function Header() {
           />
           
           {/* Mobile Menu */}
-          <div className="fixed top-[100px] left-0 right-0 bg-white z-50 lg:hidden shadow-xl">
+          <div className="fixed top-[88px] md:top-[100px] left-0 right-0 bg-white z-50 lg:hidden shadow-xl">
             <nav className="flex flex-col py-6">
               <Link 
                 href="/" 
