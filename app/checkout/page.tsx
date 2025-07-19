@@ -1034,8 +1034,7 @@ export default function CheckoutPage() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <div className="flex items-center justify-between mb-6">
-                    <h2 className="text-xl font-semibold">Ödeme Bilgileri</h2>
+                  <div className="flex items-center gap-4 mb-6">
                     <button
                       type="button"
                       onClick={handlePrevStep}
@@ -1044,6 +1043,7 @@ export default function CheckoutPage() {
                       <ChevronLeft className="w-4 h-4" />
                       <span>Geri</span>
                     </button>
+                    <h2 className="text-xl font-semibold">Ödeme Bilgileri</h2>
                   </div>
                   
                   {/* Credit Card and Form Layout */}
