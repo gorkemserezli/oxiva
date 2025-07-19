@@ -69,13 +69,13 @@ export async function POST(request: NextRequest) {
       .update(hashStr)
       .digest('base64');
     
-    // Prepare form data
+    // Prepare form data - all values must be strings for URLSearchParams
     const formData = {
       merchant_id: merchantId,
       user_ip: userIp,
       merchant_oid: merchantOid,
       email: email,
-      payment_amount: paymentAmount,
+      payment_amount: paymentAmount.toString(),
       user_basket: userBasketStr,
       user_name: user.name,
       user_address: user.address,
@@ -96,7 +96,7 @@ export async function POST(request: NextRequest) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      body: new URLSearchParams(formData as Record<string, string>).toString(),
+      body: new URLSearchParams(formData).toString(),
     });
     
     const result = await paytrResponse.json();
