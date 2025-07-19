@@ -134,26 +134,28 @@ export default function ProductTabs() {
       <div className="container-max section-padding">
         <div className="max-w-4xl mx-auto">
           {/* Tab Headers */}
-          <div className="flex flex-wrap border-b border-gray-200 mb-8">
-            {tabs.map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 font-medium transition-all relative ${
-                  activeTab === tab.id
-                    ? 'text-primary-600'
-                    : 'text-gray-600 hover:text-gray-900'
-                }`}
-              >
-                {tab.label}
-                {activeTab === tab.id && (
-                  <motion.div
-                    layoutId="activeTab"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"
-                  />
-                )}
-              </button>
-            ))}
+          <div className="border-b border-gray-200 mb-8 -mx-4 sm:mx-0">
+            <div className="flex overflow-x-auto scrollbar-hide px-4 sm:px-0 sm:flex-wrap">
+              {tabs.map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id)}
+                  className={`px-4 sm:px-6 py-3 font-medium transition-all relative whitespace-nowrap flex-shrink-0 ${
+                    activeTab === tab.id
+                      ? 'text-primary-600'
+                      : 'text-gray-600 hover:text-gray-900'
+                  }`}
+                >
+                  {tab.label}
+                  {activeTab === tab.id && (
+                    <motion.div
+                      layoutId="activeTab"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"
+                    />
+                  )}
+                </button>
+              ))}
+            </div>
           </div>
 
           {/* Tab Content */}
