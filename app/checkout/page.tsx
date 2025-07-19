@@ -1223,6 +1223,71 @@ export default function CheckoutPage() {
                     </div>
                   </div>
 
+                  {/* Terms and Submit Button - Mobile only */}
+                  <div className="lg:hidden mt-8 pt-6 border-t space-y-4">
+                    {/* Terms */}
+                    <div className="space-y-3">
+                      <label className="flex items-start">
+                        <input
+                          type="checkbox"
+                          name="termsAccepted"
+                          checked={formData.termsAccepted}
+                          onChange={handleInputChange}
+                          className="mr-2 mt-1 rounded text-primary-500 focus:ring-primary-500"
+                          required
+                        />
+                        <span className="text-xs text-gray-700">
+                          <Link href="/terms" className="text-primary-500 hover:underline font-bold">
+                            Satış Sözleşmesi
+                          </Link>
+                          {' '}ve{' '}
+                          <Link href="/privacy" className="text-primary-500 hover:underline font-bold">
+                            Gizlilik Politikasını
+                          </Link>
+                          {' '}okudum, kabul ediyorum. *
+                        </span>
+                      </label>
+                      {errors.termsAccepted && (
+                        <p className="text-xs text-red-600 flex items-center">
+                          <AlertCircle className="w-3 h-3 mr-1" />
+                          {errors.termsAccepted}
+                        </p>
+                      )}
+                      <label className="flex items-start">
+                        <input
+                          type="checkbox"
+                          name="marketingAccepted"
+                          checked={formData.marketingAccepted}
+                          onChange={handleInputChange}
+                          className="mr-2 mt-1 rounded text-primary-500 focus:ring-primary-500"
+                        />
+                        <span className="text-xs text-gray-700">
+                          Kampanya ve yeniliklerden haberdar olmak istiyorum.
+                        </span>
+                      </label>
+                    </div>
+
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isProcessing}
+                      onClick={handleSubmit}
+                      className="w-full px-6 py-3 bg-gradient-to-r from-primary-500 to-primary-600 text-white rounded-lg hover:from-primary-600 hover:to-primary-700 font-semibold disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                    >
+                      {isProcessing ? (
+                        <>
+                          <Loader2 className="w-5 h-5 animate-spin" />
+                          İşleniyor...
+                        </>
+                      ) : (
+                        <>
+                          <Lock className="w-4 h-4" />
+                          Güvenli Ödeme Yap
+                        </>
+                      )}
+                    </button>
+                  </div>
+
                 </motion.div>
               )}
 
@@ -1380,9 +1445,9 @@ export default function CheckoutPage() {
                 <span className="text-2xl font-bold text-primary-600">₺{total.toFixed(2)}</span>
               </div>
 
-              {/* Terms and Submit Button - Only show on step 2 */}
+              {/* Terms and Submit Button - Desktop only */}
               {activeStep === 2 && (
-                <div className="mt-6 pt-6 border-t space-y-4">
+                <div className="hidden lg:block mt-6 pt-6 border-t space-y-4">
                   {/* Terms */}
                   <div className="space-y-3">
                     <label className="flex items-start">
