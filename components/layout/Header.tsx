@@ -51,20 +51,10 @@ export default function Header() {
     <>
       {/* Main Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300`}>
-        {/* Top Bar */}
-        <div className="bg-gradient-to-r from-primary-600 to-primary-500 text-white text-xs md:text-sm border-b border-primary-700/20">
-          <div className="container-max section-padding py-2 md:py-2.5">
-            {/* Mobile version */}
-            <div className="md:hidden flex items-center justify-between gap-2">
-              <span className="text-white/90">Ücretsiz Kargo</span>
-              <div className="w-px h-3 bg-white/20"></div>
-              <span className="text-white/90">Aynı Gün Kargo</span>
-              <div className="w-px h-3 bg-white/20"></div>
-              <span className="text-white/90">%100 Güvenli</span>
-            </div>
-            
-            {/* Desktop version */}
-            <div className="hidden md:flex items-center justify-between">
+        {/* Top Bar - Desktop Only */}
+        <div className="hidden md:block bg-gradient-to-r from-primary-600 to-primary-500 text-white text-sm border-b border-primary-700/20">
+          <div className="container-max section-padding py-2.5">
+            <div className="flex items-center justify-between">
               <div className="flex items-center gap-6">
                 <div className="flex items-center gap-2">
                   <div className="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></div>
