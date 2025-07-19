@@ -1,11 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
 import { motion } from 'framer-motion'
 import { Check, Shield, Truck, RefreshCw, Star, Minus, Plus, Share2, Facebook, Twitter } from 'lucide-react'
-import ProductImage from '@/components/ui/ProductImage'
 import ProductImageZoom from '@/components/ui/ProductImageZoom'
 import { useCart } from '@/context/CartContext'
 import { useRouter } from 'next/navigation'

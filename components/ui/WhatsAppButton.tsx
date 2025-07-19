@@ -50,7 +50,7 @@ export default function WhatsAppButton() {
           animate={{ opacity: 1, x: 0 }}
           exit={{ opacity: 0, x: 10 }}
         >
-          Bize WhatsApp'tan ulaşın!
+          Bize WhatsApp&apos;tan ulaşın!
           <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full">
             <div className="border-8 border-transparent border-l-gray-900"></div>
           </div>

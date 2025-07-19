@@ -60,7 +60,7 @@ export default function ComparisonSection() {
             Neden Oxiva?
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Geleneksel yöntemler ile Oxiva'yı karşılaştırın
+            Geleneksel yöntemler ile Oxiva&apos;yı karşılaştırın
           </p>
         </motion.div>
 
