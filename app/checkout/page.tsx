@@ -1034,7 +1034,17 @@ export default function CheckoutPage() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ duration: 0.3 }}
                 >
-                  <h2 className="text-xl font-semibold mb-6">Ödeme Bilgileri</h2>
+                  <div className="flex items-center justify-between mb-6">
+                    <h2 className="text-xl font-semibold">Ödeme Bilgileri</h2>
+                    <button
+                      type="button"
+                      onClick={handlePrevStep}
+                      className="lg:hidden flex items-center gap-1 text-sm text-gray-600 hover:text-gray-900"
+                    >
+                      <ChevronLeft className="w-4 h-4" />
+                      <span>Geri</span>
+                    </button>
+                  </div>
                   
                   {/* Credit Card and Form Layout */}
                   <div className="grid lg:grid-cols-2 gap-8 mb-6">
@@ -1296,7 +1306,7 @@ export default function CheckoutPage() {
                 <button
                   type="button"
                   onClick={handlePrevStep}
-                  className={`px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 ${
+                  className={`hidden lg:flex px-6 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 ${
                     activeStep === 1 ? 'invisible' : ''
                   }`}
                 >
@@ -1306,7 +1316,7 @@ export default function CheckoutPage() {
                   <button
                     type="button"
                     onClick={handleNextStep}
-                    className="px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
+                    className="w-full lg:w-auto px-6 py-2 bg-primary-500 text-white rounded-lg hover:bg-primary-600"
                   >
                     Devam Et
                   </button>
