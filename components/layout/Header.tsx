@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Menu, X, Phone, Mail } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -194,48 +195,59 @@ export default function Header() {
       </header>
 
       {/* Mobile Menu Overlay */}
-      {isMenuOpen && (
-        <>
-          {/* Dark overlay */}
-          <div 
-            className="fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden"
-            onClick={() => setIsMenuOpen(false)}
-          />
-          
-          {/* Mobile Menu */}
-          <div className="fixed top-[88px] md:top-[100px] left-0 right-0 bg-white z-50 lg:hidden shadow-xl">
-            <nav className="flex flex-col py-6">
+      <AnimatePresence>
+        {isMenuOpen && (
+          <>
+            {/* Dark overlay */}
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 bg-black z-40 lg:hidden"
+              onClick={() => setIsMenuOpen(false)}
+            />
+            
+            {/* Mobile Menu */}
+            <motion.div 
+              initial={{ y: -20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
+              className="fixed top-[88px] md:top-[100px] left-0 right-0 bg-white z-50 lg:hidden shadow-xl"
+            >
+              <nav className="flex flex-col py-6 overflow-hidden">
               <Link 
                 href="/" 
                 onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+                className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
               >
                 Ana Sayfa
               </Link>
               <Link 
                 href={pathname === '/' ? '#benefits' : '/#benefits'}
                 onClick={(e) => scrollToSection(e, '#benefits')}
-                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+                className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
               >
                 Faydaları
               </Link>
               <Link 
                 href={pathname === '/' ? '#comparison' : '/#comparison'}
                 onClick={(e) => scrollToSection(e, '#comparison')}
-                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+                className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
               >
                 Neden Oxiva?
               </Link>
               <Link 
                 href={pathname === '/' ? '#how-it-works' : '/#how-it-works'}
                 onClick={(e) => scrollToSection(e, '#how-it-works')}
-                className="text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+                className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
               >
                 Nasıl Çalışır?
               </Link>
               
               {/* CTA Button */}
-              <div className="px-6 pt-4">
+              <div className="mobile-menu-item px-6 pt-4">
                 <Link 
                   href="/product"
                   onClick={() => setIsMenuOpen(false)}
@@ -246,7 +258,7 @@ export default function Header() {
               </div>
               
               {/* Contact Info */}
-              <div className="border-t border-gray-100 mt-6 pt-4 px-6">
+              <div className="mobile-menu-item border-t border-gray-100 mt-6 pt-4 px-6">
                 <div className="space-y-3">
                   <a 
                     href="mailto:info@oxiva.com"
@@ -265,9 +277,10 @@ export default function Header() {
                 </div>
               </div>
             </nav>
-          </div>
+          </motion.div>
         </>
-      )}
+        )}
+      </AnimatePresence>
     </>
   )
 }
