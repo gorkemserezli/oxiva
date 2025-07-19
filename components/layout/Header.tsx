@@ -234,8 +234,19 @@ export default function Header() {
                 Nasıl Çalışır?
               </Link>
               
+              {/* CTA Button */}
+              <div className="px-6 pt-4">
+                <Link 
+                  href="/product"
+                  onClick={() => setIsMenuOpen(false)}
+                  className="block w-full bg-gradient-to-r from-primary-500 to-primary-600 text-white px-6 py-3 rounded-full hover:from-primary-600 hover:to-primary-700 transition-all text-center font-medium shadow-md"
+                >
+                  İncele
+                </Link>
+              </div>
+              
               {/* Contact Info */}
-              <div className="border-t border-gray-100 mt-4 pt-4 px-6">
+              <div className="border-t border-gray-100 mt-6 pt-4 px-6">
                 <div className="space-y-3">
                   <a 
                     href="mailto:info@oxiva.com"
