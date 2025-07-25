@@ -99,8 +99,8 @@ export default function ReportsPage() {
     }
   ]
 
-  // Chart options
-  const chartOptions: ChartOptions<'line'> = {
+  // Chart options for line charts
+  const lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
@@ -118,6 +118,28 @@ export default function ReportsPage() {
           callback: function(value) {
             return '₺' + value
           }
+        }
+      }
+    }
+  }
+
+  // Chart options for bar charts
+  const barChartOptions: ChartOptions<'bar'> = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'top' as const,
+      },
+      title: {
+        display: false,
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          stepSize: 50
         }
       }
     }
@@ -331,7 +353,7 @@ export default function ReportsPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4">Satış Trendi</h3>
                   <div className="h-80">
-                    <Line options={chartOptions} data={salesData} />
+                    <Line options={lineChartOptions} data={salesData} />
                   </div>
                 </div>
 
@@ -375,17 +397,7 @@ export default function ReportsPage() {
                   <div className="h-80">
                     <Bar 
                       data={productData} 
-                      options={{
-                        ...chartOptions,
-                        scales: {
-                          y: {
-                            beginAtZero: true,
-                            ticks: {
-                              stepSize: 50
-                            }
-                          }
-                        }
-                      }} 
+                      options={barChartOptions}
                     />
                   </div>
                 </div>
@@ -457,7 +469,7 @@ export default function ReportsPage() {
                             tension: 0.4
                           }]
                         }}
-                        options={chartOptions}
+                        options={lineChartOptions}
                       />
                     </div>
                   </div>

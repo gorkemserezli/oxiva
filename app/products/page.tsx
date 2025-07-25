@@ -9,7 +9,7 @@ interface Product {
   id: string
   name: string
   slug: string
-  shortDescription?: string
+  shortDesc?: string
   price: number
   comparePrice?: number
   stock: number
@@ -46,7 +46,7 @@ export default function ProductsPage() {
   // Filter products based on search
   const filteredProducts = products.filter(product =>
     product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    product.shortDescription?.toLowerCase().includes(searchTerm.toLowerCase())
+    product.shortDesc?.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   // Sort products
@@ -169,9 +169,9 @@ export default function ProductsPage() {
                     {product.name}
                   </h3>
                   
-                  {product.shortDescription && (
+                  {product.shortDesc && (
                     <p className="text-sm text-gray-600 mb-2 line-clamp-2">
-                      {product.shortDescription}
+                      {product.shortDesc}
                     </p>
                   )}
                   

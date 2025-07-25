@@ -6,11 +6,12 @@ const prisma = new PrismaClient()
 // Get single product
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const product = await prisma.product.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         orderItems: {
           include: {
@@ -42,9 +43,10 @@ export async function GET(
 // Update product
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const data = await request.json()
     
     // Check if SKU is unique (if changed)
@@ -52,7 +54,7 @@ export async function PUT(
       const existingSku = await prisma.product.findFirst({
         where: {
           sku: data.sku,
-          NOT: { id: params.id }
+          NOT: { id }
         }
       })
       
@@ -65,7 +67,7 @@ export async function PUT(
     }
 
     const product = await prisma.product.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         name: data.name,
         description: data.description,
@@ -96,12 +98,13 @@ export async function PUT(
 // Delete product
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     // Check if product has orders
     const orderCount = await prisma.orderItem.count({
-      where: { productId: params.id }
+      where: { productId: id }
     })
     
     if (orderCount > 0) {
@@ -112,7 +115,7 @@ export async function DELETE(
     }
 
     await prisma.product.delete({
-      where: { id: params.id }
+      where: { id }
     })
 
     return NextResponse.json({ success: true })

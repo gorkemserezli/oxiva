@@ -106,10 +106,10 @@ const districtsData: Record<string, Array<{ id: number; name: string; cityId: nu
 
 export async function GET(
   request: Request,
-  { params }: { params: { cityId: string } }
+  { params }: { params: Promise<{ cityId: string }> }
 ) {
   try {
-    const cityId = params.cityId
+    const { cityId } = await params
     const districts = districtsData[cityId] || []
     
     // If no specific districts, return generic districts

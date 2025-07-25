@@ -409,7 +409,7 @@ export default function AdminOrdersPage() {
 
           {/* Mobile Cards */}
           <div className="lg:hidden space-y-4">
-            {filteredOrders.map((order) => {
+            {orders.map((order) => {
               const StatusIcon = statusIcons[order.status as keyof typeof statusIcons]
               return (
                 <div key={order.id} className="bg-white rounded-lg shadow-sm border border-gray-200">

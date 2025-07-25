@@ -4,11 +4,12 @@ import { prisma } from '@/lib/db'
 // Get single order
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const order = await prisma.order.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         items: {
           include: {
@@ -42,12 +43,13 @@ export async function GET(
 // Update order
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const data = await request.json()
     const currentOrder = await prisma.order.findUnique({
-      where: { id: params.id }
+      where: { id }
     })
 
     if (!currentOrder) {
@@ -103,7 +105,7 @@ export async function PUT(
     }
 
     const order = await prisma.order.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         ...updates,
         timeline: {
@@ -135,11 +137,12 @@ export async function PUT(
 // Cancel order
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
+    const { id } = await params
     const order = await prisma.order.findUnique({
-      where: { id: params.id },
+      where: { id },
       include: {
         items: true
       }
@@ -161,7 +164,7 @@ export async function DELETE(
 
     // Update order status
     await prisma.order.update({
-      where: { id: params.id },
+      where: { id },
       data: {
         status: 'CANCELLED',
         timeline: {

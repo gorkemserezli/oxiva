@@ -17,8 +17,8 @@ export async function GET(request: NextRequest) {
     const methodsData = paymentMethods.find(s => s.key === 'paymentMethods')
     const bankAccountsData = paymentMethods.find(s => s.key === 'bankAccounts')
     
-    const methods = methodsData ? JSON.parse(methodsData.value) : { creditCard: false, bankTransfer: false }
-    const bankAccounts = bankAccountsData ? JSON.parse(bankAccountsData.value) : []
+    const methods = methodsData ? JSON.parse(methodsData.value as string) : { creditCard: false, bankTransfer: false }
+    const bankAccounts = bankAccountsData ? JSON.parse(bankAccountsData.value as string) : []
     
     // Only return enabled payment methods
     const availableMethods = []

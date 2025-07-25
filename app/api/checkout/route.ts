@@ -94,40 +94,31 @@ export async function POST(request: NextRequest) {
       }
       
       // Create delivery address
-      const deliveryAddress = await tx.address.create({
-        data: {
-          userId: user.id,
-          title: 'Teslimat Adresi',
+      const deliveryAddressData = {
+        title: 'Teslimat Adresi',
+        firstName,
+        lastName,
+        phone,
+        address,
+        city,
+        district
+      }
+      
+      // Create billing address if different
+      let billingAddressData: any = deliveryAddressData
+      if (!sameAsDelivery) {
+        billingAddressData = {
+          title: billingTitle || 'Fatura Adresi',
           firstName,
           lastName,
           phone,
-          address,
-          city,
-          district,
-          type: 'DELIVERY'
+          address: billingAddress || '',
+          city: billingCity || '',
+          district: billingDistrict || '',
+          tcNo: billingTcNo,
+          taxNo: billingTaxNo,
+          taxOffice: billingTaxOffice
         }
-      })
-      
-      // Create billing address if different
-      let billingAddressId = deliveryAddress.id
-      if (!sameAsDelivery) {
-        const billingAddressRecord = await tx.address.create({
-          data: {
-            userId: user.id,
-            title: billingTitle || 'Fatura Adresi',
-            firstName,
-            lastName,
-            phone,
-            address: billingAddress || '',
-            city: billingCity || '',
-            district: billingDistrict || '',
-            tcNo: billingTcNo,
-            taxNo: billingTaxNo,
-            taxOffice: billingTaxOffice,
-            type: 'BILLING'
-          }
-        })
-        billingAddressId = billingAddressRecord.id
       }
       
       // Generate order number
@@ -139,20 +130,25 @@ export async function POST(request: NextRequest) {
         data: {
           orderNumber,
           userId: user.id,
-          status: 'PENDING_PAYMENT',
+          customerEmail: email,
+          customerPhone: phone,
+          customerName: `${firstName} ${lastName}`,
+          status: 'NEW',
           subtotal,
-          shipping,
           discount: discountAmount || 0,
-          kdv: kdvAmount,
+          tax: kdvAmount,
           total,
-          note: orderNote,
-          deliveryAddressId: deliveryAddress.id,
-          billingAddressId,
+          orderNote: orderNote,
+          deliveryAddress: deliveryAddressData,
+          billingAddress: billingAddressData,
           paymentMethod: 'CREDIT_CARD',
-          shippingMethod: 'MNG_KARGO',
+          paymentStatus: 'PENDING',
+          shippingCompany: 'Standart Kargo',
+          shippingCost: shipping,
           items: {
             create: {
               productId: product.id,
+              name: product.name,
               quantity,
               price,
               total: price * quantity
@@ -164,9 +160,7 @@ export async function POST(request: NextRequest) {
             include: {
               product: true
             }
-          },
-          deliveryAddress: true,
-          billingAddress: true
+          }
         }
       })
       
@@ -225,9 +219,7 @@ export async function GET(request: NextRequest) {
             product: true
           }
         },
-        user: true,
-        deliveryAddress: true,
-        billingAddress: true
+        user: true
       }
     })
     

@@ -1234,194 +1234,195 @@ export default function CheckoutPage() {
                   
                   {/* Credit Card Payment */}
                   {selectedPaymentMethod === 'creditCard' && (
-                    <div className="grid lg:grid-cols-2 gap-8 mb-6">
-                      {/* Left Column - Credit Card Animation */}
-                      <div className="order-1 lg:order-1">
-                        <div className="mb-6 lg:mb-0">
-                          <CreditCard
-                            cardNumber={formData.cardNumber}
-                            cardName={formData.cardName}
-                            expiryDate={formData.expiryDate}
-                            cvv={formData.cvv}
-                            isFlipped={isCardFlipped}
-                          />
-                        </div>
-                      
-                      {/* Security Notices */}
-                      <div className="space-y-3 mt-4">
-                        <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center">
-                          <Lock className="w-4 h-4 text-green-600 mr-2 flex-shrink-0" />
-                          <p className="text-xs text-green-800">
-                            256-bit SSL sertifikası ile güvenli ödeme
-                          </p>
-                        </div>
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
-                          <div className="flex items-start">
-                            <Shield className="w-4 h-4 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
-                            <div>
-                              <p className="text-xs text-blue-800 font-medium">3D Secure Güvencesi</p>
-                              <p className="text-xs text-blue-700 mt-0.5">
-                                SMS onayı ile ekstra güvenlik
+                    <div>
+                      <div className="grid lg:grid-cols-2 gap-8 mb-6">
+                        {/* Left Column - Credit Card Animation */}
+                        <div className="order-1 lg:order-1">
+                          <div className="mb-6 lg:mb-0">
+                            <CreditCard
+                              cardNumber={formData.cardNumber}
+                              cardName={formData.cardName}
+                              expiryDate={formData.expiryDate}
+                              cvv={formData.cvv}
+                              isFlipped={isCardFlipped}
+                            />
+                          </div>
+                          
+                          {/* Security Notices */}
+                          <div className="space-y-3 mt-4">
+                            <div className="bg-green-50 border border-green-200 rounded-lg p-3 flex items-center">
+                              <Lock className="w-4 h-4 text-green-600 mr-2 flex-shrink-0" />
+                              <p className="text-xs text-green-800">
+                                256-bit SSL sertifikası ile güvenli ödeme
                               </p>
+                            </div>
+                            <div className="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                              <div className="flex items-start">
+                                <Shield className="w-4 h-4 text-blue-600 mr-2 flex-shrink-0 mt-0.5" />
+                                <div>
+                                  <p className="text-xs text-blue-800 font-medium">3D Secure Güvencesi</p>
+                                  <p className="text-xs text-blue-700 mt-0.5">
+                                    SMS onayı ile ekstra güvenlik
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+                        {/* Right Column - Form Fields */}
+                        <div className="order-2 lg:order-2">
+                          <div className="space-y-4">
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Kart Numarası *
+                              </label>
+                              <input
+                                type="text"
+                                name="cardNumber"
+                                value={formData.cardNumber}
+                                onChange={handleInputChange}
+                                placeholder="1234 5678 9012 3456"
+                                maxLength={19}
+                                className={getFieldClass('cardNumber')}
+                                required
+                              />
+                              {errors.cardNumber && (
+                                <p className="mt-1 text-sm text-red-600 flex items-center">
+                                  <AlertCircle className="w-4 h-4 mr-1" />
+                                  {errors.cardNumber}
+                                </p>
+                              )}
+                            </div>
+                            <div>
+                              <label className="block text-sm font-medium text-gray-700 mb-1">
+                                Kart Üzerindeki İsim *
+                              </label>
+                              <input
+                                type="text"
+                                name="cardName"
+                                value={formData.cardName}
+                                onChange={handleInputChange}
+                                className={getFieldClass('cardName')}
+                                required
+                              />
+                              {errors.cardName && (
+                                <p className="mt-1 text-sm text-red-600 flex items-center">
+                                  <AlertCircle className="w-4 h-4 mr-1" />
+                                  {errors.cardName}
+                                </p>
+                              )}
+                            </div>
+                            <div className="grid grid-cols-2 gap-4">
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                  Son Kullanma Tarihi *
+                                </label>
+                                <input
+                                  type="text"
+                                  name="expiryDate"
+                                  value={formData.expiryDate}
+                                  onChange={handleInputChange}
+                                  placeholder="AA/YY"
+                                  maxLength={5}
+                                  className={getFieldClass('expiryDate')}
+                                  required
+                                />
+                                {errors.expiryDate && (
+                                  <p className="mt-1 text-sm text-red-600 flex items-center">
+                                    <AlertCircle className="w-4 h-4 mr-1" />
+                                    {errors.expiryDate}
+                                  </p>
+                                )}
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">
+                                  CVV *
+                                </label>
+                                <input
+                                  type="text"
+                                  name="cvv"
+                                  value={formData.cvv}
+                                  onChange={handleInputChange}
+                                  onFocus={() => setIsCardFlipped(true)}
+                                  onBlur={() => setIsCardFlipped(false)}
+                                  placeholder="123"
+                                  maxLength={3}
+                                  className={getFieldClass('cvv')}
+                                  required
+                                />
+                                {errors.cvv && (
+                                  <p className="mt-1 text-sm text-red-600 flex items-center">
+                                    <AlertCircle className="w-4 h-4 mr-1" />
+                                    {errors.cvv}
+                                  </p>
+                                )}
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
-                    </div>
-
-                    {/* Right Column - Form Fields */}
-                    <div className="order-2 lg:order-2">
-                      <div className="space-y-4">
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Kart Numarası *
-                          </label>
-                          <input
-                            type="text"
-                            name="cardNumber"
-                            value={formData.cardNumber}
-                            onChange={handleInputChange}
-                            placeholder="1234 5678 9012 3456"
-                            maxLength={19}
-                            className={getFieldClass('cardNumber')}
-                            required
-                          />
-                          {errors.cardNumber && (
-                            <p className="mt-1 text-sm text-red-600 flex items-center">
-                              <AlertCircle className="w-4 h-4 mr-1" />
-                              {errors.cardNumber}
-                            </p>
-                          )}
-                        </div>
-                        <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-1">
-                            Kart Üzerindeki İsim *
-                          </label>
-                          <input
-                            type="text"
-                            name="cardName"
-                            value={formData.cardName}
-                            onChange={handleInputChange}
-                            className={getFieldClass('cardName')}
-                            required
-                          />
-                          {errors.cardName && (
-                            <p className="mt-1 text-sm text-red-600 flex items-center">
-                              <AlertCircle className="w-4 h-4 mr-1" />
-                              {errors.cardName}
-                            </p>
-                          )}
-                        </div>
-                        <div className="grid grid-cols-2 gap-4">
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                              Son Kullanma Tarihi *
-                            </label>
-                            <input
-                              type="text"
-                              name="expiryDate"
-                              value={formData.expiryDate}
-                              onChange={handleInputChange}
-                              placeholder="AA/YY"
-                              maxLength={5}
-                              className={getFieldClass('expiryDate')}
-                              required
+                      
+                      {/* Accepted Card Logos */}
+                      <div className="mt-6 pt-6 border-t">
+                        <p className="text-xs text-gray-600 mb-3 text-center">Kabul Edilen Kartlar</p>
+                        <div className="flex justify-center items-center gap-3 flex-wrap">
+                          {/* Mastercard */}
+                          <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
+                            <Image 
+                              src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
+                              alt="Mastercard"
+                              width={64}
+                              height={16}
+                              className="h-4 w-auto"
                             />
-                            {errors.expiryDate && (
-                              <p className="mt-1 text-sm text-red-600 flex items-center">
-                                <AlertCircle className="w-4 h-4 mr-1" />
-                                {errors.expiryDate}
-                              </p>
-                            )}
                           </div>
-                          <div>
-                            <label className="block text-sm font-medium text-gray-700 mb-1">
-                              CVV *
-                            </label>
-                            <input
-                              type="text"
-                              name="cvv"
-                              value={formData.cvv}
-                              onChange={handleInputChange}
-                              onFocus={() => setIsCardFlipped(true)}
-                              onBlur={() => setIsCardFlipped(false)}
-                              placeholder="123"
-                              maxLength={3}
-                              className={getFieldClass('cvv')}
-                              required
+                          {/* Visa */}
+                          <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
+                            <Image 
+                              src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
+                              alt="Visa"
+                              width={64}
+                              height={16}
+                              className="h-4 w-auto"
                             />
-                            {errors.cvv && (
-                              <p className="mt-1 text-sm text-red-600 flex items-center">
-                                <AlertCircle className="w-4 h-4 mr-1" />
-                                {errors.cvv}
-                              </p>
-                            )}
+                          </div>
+                          {/* Troy */}
+                          <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
+                            <Image 
+                              src="/images/troy.png"
+                              alt="Troy"
+                              width={48}
+                              height={12}
+                              className="h-3 w-auto"
+                            />
+                          </div>
+                          {/* AMEX */}
+                          <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
+                            <Image 
+                              src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
+                              alt="American Express"
+                              width={64}
+                              height={20}
+                              className="h-5 w-auto"
+                            />
+                          </div>
+                          {/* Maestro */}
+                          <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
+                            <Image 
+                              src="https://upload.wikimedia.org/wikipedia/commons/8/80/Maestro_2016.svg"
+                              alt="Maestro"
+                              width={64}
+                              height={20}
+                              className="h-5 w-auto"
+                            />
                           </div>
                         </div>
                       </div>
                     </div>
-                  </div>
-
-
-                  {/* Accepted Card Logos */}
-                  <div className="mt-6 pt-6 border-t">
-                    <p className="text-xs text-gray-600 mb-3 text-center">Kabul Edilen Kartlar</p>
-                    <div className="flex justify-center items-center gap-3 flex-wrap">
-                      {/* Mastercard */}
-                      <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <Image 
-                          src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg"
-                          alt="Mastercard"
-                          width={64}
-                          height={16}
-                          className="h-4 w-auto"
-                        />
-                      </div>
-                      {/* Visa */}
-                      <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <Image 
-                          src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg"
-                          alt="Visa"
-                          width={64}
-                          height={16}
-                          className="h-4 w-auto"
-                        />
-                      </div>
-                      {/* Troy */}
-                      <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <Image 
-                          src="/images/troy.png"
-                          alt="Troy"
-                          width={48}
-                          height={12}
-                          className="h-3 w-auto"
-                        />
-                      </div>
-                      {/* AMEX */}
-                      <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <Image 
-                          src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_%282018%29.svg"
-                          alt="American Express"
-                          width={64}
-                          height={20}
-                          className="h-5 w-auto"
-                        />
-                      </div>
-                      {/* Maestro */}
-                      <div className="bg-white px-3 py-2 rounded border border-gray-200 flex items-center h-10">
-                        <Image 
-                          src="https://upload.wikimedia.org/wikipedia/commons/8/80/Maestro_2016.svg"
-                          alt="Maestro"
-                          width={64}
-                          height={20}
-                          className="h-5 w-auto"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                )}
+                  )}
                   
-                {/* Bank Transfer Payment */}
+                  {/* Bank Transfer Payment */}
                 {selectedPaymentMethod === 'bankTransfer' && (
                   <div className="space-y-6">
                     {paymentMethods.find(m => m.id === 'bankTransfer')?.bankAccounts && (

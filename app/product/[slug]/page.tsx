@@ -11,7 +11,7 @@ interface Product {
   name: string
   slug: string
   description: string
-  shortDescription?: string
+  shortDesc?: string
   price: number
   comparePrice?: number
   stock: number
@@ -200,8 +200,8 @@ export default function ProductDetailPage() {
           <div>
             <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.name}</h1>
             
-            {product.shortDescription && (
-              <p className="text-gray-600 mb-4">{product.shortDescription}</p>
+            {product.shortDesc && (
+              <p className="text-gray-600 mb-4">{product.shortDesc}</p>
             )}
             
             <div className="mb-6">
