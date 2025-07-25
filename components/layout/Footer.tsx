@@ -1,9 +1,39 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
 import { Shield, CreditCard, Truck, HeadphonesIcon } from 'lucide-react'
+import { useState, useEffect } from 'react'
+
+interface StoreSettings {
+  storeName?: string
+  storeDescription?: string
+  email?: string
+  phone?: string
+  whatsappNumber?: string
+  storeAddress?: string
+  logo?: string
+}
 
 export default function Footer() {
   const currentYear = new Date().getFullYear()
+  const [settings, setSettings] = useState<StoreSettings>({})
+
+  useEffect(() => {
+    fetchSettings()
+  }, [])
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch('/api/settings')
+      if (response.ok) {
+        const data = await response.json()
+        setSettings(data)
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error)
+    }
+  }
 
   return (
     <footer className="bg-gray-50">
@@ -43,15 +73,15 @@ export default function Footer() {
             <div className="md:col-span-1">
               <div className="bg-white rounded-lg p-2 inline-block mb-4">
                 <Image
-                  src="/images/logo.png"
-                  alt="Oxiva Logo"
+                  src={settings.logo ? settings.logo : "/images/logo.png"}
+                  alt={`${settings.storeName || 'Oxiva'} Logo`}
                   width={120}
                   height={40}
                   className="h-10 w-auto"
                 />
               </div>
               <p className="text-sm text-gray-300">
-                Mıknatıslı burun bandı ile rahat nefes alın, horlama sorununa son verin.
+                {settings.storeDescription || "Mıknatıslı burun bandı ile rahat nefes alın, horlama sorununa son verin."}
               </p>
             </div>
 
@@ -74,6 +104,7 @@ export default function Footer() {
                 <li><Link href="/returns" className="text-gray-300 hover:text-white transition-colors">İade & Değişim</Link></li>
                 <li><Link href="/privacy" className="text-gray-300 hover:text-white transition-colors">Gizlilik Politikası</Link></li>
                 <li><Link href="/terms" className="text-gray-300 hover:text-white transition-colors">Kullanım Koşulları</Link></li>
+                <li><Link href="/admin/login" className="text-gray-300 hover:text-white transition-colors">Admin Panel</Link></li>
               </ul>
             </div>
 
@@ -81,8 +112,18 @@ export default function Footer() {
             <div>
               <h3 className="font-semibold mb-4">İletişim</h3>
               <ul className="space-y-2 text-sm text-gray-300">
-                <li>E-posta: info@oxiva.com</li>
-                <li>Telefon: 0850 XXX XX XX</li>
+                {settings.email && (
+                  <li>E-posta: {settings.email}</li>
+                )}
+                {settings.phone && (
+                  <li>Telefon: {settings.phone}</li>
+                )}
+                {settings.whatsappNumber && (
+                  <li>WhatsApp: {settings.whatsappNumber}</li>
+                )}
+                {settings.storeAddress && (
+                  <li>Adres: {settings.storeAddress}</li>
+                )}
                 <li>Çalışma Saatleri: 09:00 - 18:00</li>
               </ul>
             </div>
@@ -90,7 +131,7 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="mt-8 pt-8 border-t border-gray-700 text-center text-sm text-gray-400">
-            <p>&copy; {currentYear} Oxiva. Tüm hakları saklıdır.</p>
+            <p>&copy; {currentYear} {settings.storeName || 'Oxiva'}. Tüm hakları saklıdır.</p>
           </div>
         </div>
       </div>

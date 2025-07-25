@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useCart } from '@/context/CartContext'
-import { ChevronLeft, ChevronRight, Lock, CreditCard as CreditCardIcon, Truck, Shield, CheckCircle, AlertCircle, Loader2, Tag, X } from 'lucide-react'
+import { ChevronLeft, ChevronRight, Lock, CreditCard as CreditCardIcon, Truck, Shield, CheckCircle, AlertCircle, Loader2, Tag, X, Building2 } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { addressService, type City, type District } from '@/utils/addressService'
@@ -62,7 +62,7 @@ interface FormData {
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { quantity, discountedPrice, price: originalPrice } = useCart()
+  const { quantity, discountedPrice, price: originalPrice, product } = useCart()
   const [activeStep, setActiveStep] = useState(1)
   const [errors, setErrors] = useState<Record<string, string>>({})
   const [isCardFlipped, setIsCardFlipped] = useState(false)
@@ -70,6 +70,11 @@ export default function CheckoutPage() {
   const [showMobileOrderSummary, setShowMobileOrderSummary] = useState(false)
   const [paytrToken, setPaytrToken] = useState('')
   const [showPaytrIframe, setShowPaytrIframe] = useState(false)
+  
+  // Payment method states
+  const [paymentMethods, setPaymentMethods] = useState<any[]>([])
+  const [selectedPaymentMethod, setSelectedPaymentMethod] = useState('creditCard')
+  const [loadingPaymentMethods, setLoadingPaymentMethods] = useState(true)
   
   // Address data states
   const [cities, setCities] = useState<City[]>([])
@@ -128,7 +133,27 @@ export default function CheckoutPage() {
         console.error('Error loading saved data:', e)
       }
     }
+    
+    // Load payment methods
+    fetchPaymentMethods()
   }, [])
+  
+  const fetchPaymentMethods = async () => {
+    try {
+      const response = await fetch('/api/payment-methods')
+      if (response.ok) {
+        const data = await response.json()
+        setPaymentMethods(data.methods)
+        if (data.defaultMethod) {
+          setSelectedPaymentMethod(data.defaultMethod)
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching payment methods:', error)
+    } finally {
+      setLoadingPaymentMethods(false)
+    }
+  }
   
   // Save form data to localStorage on change
   useEffect(() => {
@@ -377,12 +402,16 @@ export default function CheckoutPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
-    // Validate payment fields
+    // Validate payment fields based on payment method
     const paymentErrors: Record<string, string> = {};
-    if (!validateCardNumber(formData.cardNumber)) paymentErrors.cardNumber = validationMessages.cardNumber;
-    if (!validateName(formData.cardName)) paymentErrors.cardName = validationMessages.name;
-    if (!validateExpiryDate(formData.expiryDate)) paymentErrors.expiryDate = validationMessages.expiryDate;
-    if (!validateCVV(formData.cvv)) paymentErrors.cvv = validationMessages.cvv;
+    
+    if (selectedPaymentMethod === 'creditCard') {
+      if (!validateCardNumber(formData.cardNumber)) paymentErrors.cardNumber = validationMessages.cardNumber;
+      if (!validateName(formData.cardName)) paymentErrors.cardName = validationMessages.name;
+      if (!validateExpiryDate(formData.expiryDate)) paymentErrors.expiryDate = validationMessages.expiryDate;
+      if (!validateCVV(formData.cvv)) paymentErrors.cvv = validationMessages.cvv;
+    }
+    
     if (!formData.termsAccepted) paymentErrors.termsAccepted = 'Satış sözleşmesini kabul etmelisiniz';
     
     if (Object.keys(paymentErrors).length > 0) {
@@ -394,6 +423,10 @@ export default function CheckoutPage() {
     setIsProcessing(true)
     
     try {
+      if (!product) {
+        throw new Error('Ürün bilgisi bulunamadı')
+      }
+      
       // Save form to localStorage
       localStorage.setItem('lastCheckoutData', JSON.stringify(formData))
       
@@ -401,44 +434,102 @@ export default function CheckoutPage() {
       const cityName = cities.find(c => c.id === parseInt(formData.city))?.name || ''
       const districtName = districts.find(d => d.id === parseInt(formData.district))?.name || ''
       
-      // Prepare order data for PayTR
-      const orderData = {
-        email: formData.email,
-        payment_amount: Math.round(total * 100), // PayTR expects amount in kuruş
-        user_name: `${formData.firstName} ${formData.lastName}`,
-        user_address: `${formData.address} ${districtName} ${cityName}`,
-        user_phone: formData.phone,
-        merchant_oid: `OX_${Date.now()}`, // Unique order ID
-        user_basket: JSON.stringify([
-          ['Oxiva Mıknatıslı Burun Bandı', `${discountedPrice.toFixed(2)}`, quantity]
-        ]),
-        debug_on: process.env.NODE_ENV === 'development' ? 1 : 0,
-        test_mode: 1, // Set to 0 for production
-        no_installment: 0,
-        max_installment: 0,
-        lang: 'tr'
-      }
-      
-      // Call PayTR API
-      const response = await fetch('/api/payment/paytr', {
+      // First create order in database
+      const orderResponse = await fetch('/api/checkout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(orderData)
+        body: JSON.stringify({
+          // User data
+          email: formData.email,
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          phone: formData.phone,
+          
+          // Delivery address
+          address: formData.address,
+          city: formData.city,
+          district: formData.district,
+          
+          // Billing info
+          sameAsDelivery: formData.sameAsDelivery,
+          invoiceType: formData.invoiceType,
+          billingTitle: formData.billingTitle,
+          billingTcNo: formData.billingTcNo,
+          billingTaxNo: formData.billingTaxNo,
+          billingTaxOffice: formData.billingTaxOffice,
+          billingAddress: formData.billingAddress,
+          billingCity: formData.billingCity,
+          billingDistrict: formData.billingDistrict,
+          
+          // Order details
+          orderNote: formData.orderNote,
+          productId: product.id,
+          quantity,
+          price: discountedPrice,
+          discountCode: appliedDiscount?.code,
+          discountAmount: appliedDiscount?.amount || 0,
+          subtotal: subtotalAfterDiscountWithoutKDV,
+          kdvAmount,
+          shipping,
+          total,
+          paymentMethod: selectedPaymentMethod
+        })
       })
       
-      const result = await response.json()
+      if (!orderResponse.ok) {
+        const error = await orderResponse.json()
+        throw new Error(error.error || 'Sipariş oluşturulamadı')
+      }
       
-      if (result.status === 'success' && result.token) {
-        // Save order ID for later use
-        localStorage.setItem('currentOrderId', orderData.merchant_oid)
+      const orderResult = await orderResponse.json()
+      
+      // Save order ID for later use
+      localStorage.setItem('currentOrderId', orderResult.orderId)
+      localStorage.setItem('currentOrderNumber', orderResult.orderNumber)
+      
+      if (selectedPaymentMethod === 'creditCard') {
+        // Prepare order data for PayTR
+        const orderData = {
+          email: formData.email,
+          payment_amount: Math.round(total * 100), // PayTR expects amount in kuruş
+          user_name: `${formData.firstName} ${formData.lastName}`,
+          user_address: `${formData.address} ${districtName} ${cityName}`,
+          user_phone: formData.phone,
+          merchant_oid: orderResult.orderNumber, // Use order number from database
+          user_basket: JSON.stringify([
+            [product.name, `${discountedPrice.toFixed(2)}`, quantity]
+          ]),
+          debug_on: process.env.NODE_ENV === 'development' ? 1 : 0,
+          test_mode: 1, // Set to 0 for production
+          no_installment: 0,
+          max_installment: 0,
+          lang: 'tr'
+        }
         
-        // Show PayTR iframe
-        setPaytrToken(result.token)
-        setShowPaytrIframe(true)
-      } else {
-        throw new Error(result.reason || 'Ödeme başlatılamadı')
+        // Call PayTR API
+        const response = await fetch('/api/payment/paytr', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(orderData)
+        })
+        
+        const result = await response.json()
+        
+        if (result.status === 'success' && result.token) {
+          // Show PayTR iframe
+          setPaytrToken(result.token)
+          setShowPaytrIframe(true)
+        } else {
+          throw new Error(result.reason || 'Ödeme başlatılamadı')
+        }
+      } else if (selectedPaymentMethod === 'bankTransfer') {
+        // For bank transfer, redirect to order confirmation
+        localStorage.removeItem('cart')
+        router.push(`/order-confirmation?orderNumber=${orderResult.orderNumber}`)
       }
     } catch (error) {
       console.error('Payment error:', error)
@@ -1087,19 +1178,74 @@ export default function CheckoutPage() {
                     <h2 className="text-xl font-semibold">Ödeme Bilgileri</h2>
                   </div>
                   
-                  {/* Credit Card and Form Layout */}
-                  <div className="grid lg:grid-cols-2 gap-8 mb-6">
-                    {/* Left Column - Credit Card Animation */}
-                    <div className="order-1 lg:order-1">
-                      <div className="mb-6 lg:mb-0">
-                        <CreditCard
-                          cardNumber={formData.cardNumber}
-                          cardName={formData.cardName}
-                          expiryDate={formData.expiryDate}
-                          cvv={formData.cvv}
-                          isFlipped={isCardFlipped}
-                        />
+                  {/* Payment Method Selection */}
+                  {!loadingPaymentMethods && paymentMethods.length > 0 && (
+                    <div className="mb-6">
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        Ödeme Yöntemi Seçin
+                      </label>
+                      <div className="space-y-3">
+                        {paymentMethods.map((method) => (
+                          <label
+                            key={method.id}
+                            className={`flex items-center p-4 border rounded-lg cursor-pointer transition-all ${
+                              selectedPaymentMethod === method.id
+                                ? 'border-primary-500 bg-primary-50'
+                                : 'border-gray-300 hover:border-gray-400'
+                            }`}
+                          >
+                            <input
+                              type="radio"
+                              name="paymentMethod"
+                              value={method.id}
+                              checked={selectedPaymentMethod === method.id}
+                              onChange={(e) => setSelectedPaymentMethod(e.target.value)}
+                              className="mr-3"
+                            />
+                            <div className="flex-1">
+                              <h4 className="font-medium">{method.name}</h4>
+                              <p className="text-sm text-gray-600">{method.description}</p>
+                            </div>
+                            {method.icon === 'CreditCard' && (
+                              <CreditCardIcon className="w-5 h-5 text-gray-400 ml-3" />
+                            )}
+                            {method.icon === 'Bank' && (
+                              <Building2 className="w-5 h-5 text-gray-400 ml-3" />
+                            )}
+                          </label>
+                        ))}
                       </div>
+                    </div>
+                  )}
+                  
+                  {loadingPaymentMethods && (
+                    <div className="flex justify-center py-8">
+                      <Loader2 className="w-8 h-8 animate-spin text-primary-500" />
+                    </div>
+                  )}
+                  
+                  {!loadingPaymentMethods && paymentMethods.length === 0 && (
+                    <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 mb-6">
+                      <p className="text-sm text-yellow-800">
+                        Şu anda aktif ödeme yöntemi bulunmamaktadır. Lütfen yönetici ile iletişime geçin.
+                      </p>
+                    </div>
+                  )}
+                  
+                  {/* Credit Card Payment */}
+                  {selectedPaymentMethod === 'creditCard' && (
+                    <div className="grid lg:grid-cols-2 gap-8 mb-6">
+                      {/* Left Column - Credit Card Animation */}
+                      <div className="order-1 lg:order-1">
+                        <div className="mb-6 lg:mb-0">
+                          <CreditCard
+                            cardNumber={formData.cardNumber}
+                            cardName={formData.cardName}
+                            expiryDate={formData.expiryDate}
+                            cvv={formData.cvv}
+                            isFlipped={isCardFlipped}
+                          />
+                        </div>
                       
                       {/* Security Notices */}
                       <div className="space-y-3 mt-4">
@@ -1273,6 +1419,40 @@ export default function CheckoutPage() {
                       </div>
                     </div>
                   </div>
+                )}
+                  
+                {/* Bank Transfer Payment */}
+                {selectedPaymentMethod === 'bankTransfer' && (
+                  <div className="space-y-6">
+                    {paymentMethods.find(m => m.id === 'bankTransfer')?.bankAccounts && (
+                      <div className="bg-gray-50 rounded-lg p-6">
+                        <h3 className="font-semibold text-lg mb-4">Banka Hesap Bilgileri</h3>
+                        <div className="space-y-4">
+                          {paymentMethods.find(m => m.id === 'bankTransfer').bankAccounts.map((account: any, index: number) => (
+                            <div key={index} className="bg-white rounded-lg p-4 border border-gray-200">
+                              <h4 className="font-medium text-gray-900">{account.bankName}</h4>
+                              <div className="mt-2 space-y-1 text-sm">
+                                <div className="flex justify-between">
+                                  <span className="text-gray-600">Hesap Adı:</span>
+                                  <span className="font-medium">{account.accountHolder}</span>
+                                </div>
+                                <div className="flex justify-between">
+                                  <span className="text-gray-600">IBAN:</span>
+                                  <span className="font-mono">{account.iban}</span>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                        <div className="mt-4 bg-blue-50 border border-blue-200 rounded-lg p-4">
+                          <p className="text-sm text-blue-800">
+                            <strong>Açıklama:</strong> Havale/EFT yaparken açıklama kısmına sipariş numaranızı yazmayı unutmayın.
+                          </p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                )}
 
                   {/* Terms and Submit Button - Mobile only */}
                   <div className="lg:hidden mt-8 pt-6 border-t space-y-4">
@@ -1383,7 +1563,7 @@ export default function CheckoutPage() {
                   />
                 </div>
                 <div className="flex-1">
-                  <h4 className="font-medium">Oxiva Mıknatıslı Burun Bandı</h4>
+                  <h4 className="font-medium">{product?.name || 'Oxiva Mıknatıslı Burun Bandı'}</h4>
                   <p className="text-sm text-gray-600">Adet: {quantity}</p>
                 </div>
                 <p className="font-semibold">₺{(discountedPrice * quantity).toFixed(2)}</p>

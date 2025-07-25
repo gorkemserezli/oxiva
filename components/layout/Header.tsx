@@ -7,9 +7,20 @@ import { useState, useEffect } from 'react'
 import { useRouter, usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 
+interface StoreSettings {
+  storeName?: string
+  siteTitle?: string
+  email?: string
+  phone?: string
+  whatsappNumber?: string
+  logo?: string
+  favicon?: string
+}
+
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
+  const [settings, setSettings] = useState<StoreSettings>({})
   const router = useRouter()
   const pathname = usePathname()
 
@@ -20,6 +31,36 @@ export default function Header() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Fetch store settings
+  useEffect(() => {
+    fetchSettings()
+  }, [])
+
+  const fetchSettings = async () => {
+    try {
+      const response = await fetch('/api/settings')
+      if (response.ok) {
+        const data = await response.json()
+        setSettings(data)
+        
+        // Update favicon if available
+        if (data.favicon) {
+          const faviconLink = document.querySelector("link[rel~='icon']") as HTMLLinkElement
+          if (faviconLink) {
+            faviconLink.href = data.favicon
+          }
+        }
+        
+        // Update page title if available
+        if (data.siteTitle) {
+          document.title = data.siteTitle
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching settings:', error)
+    }
+  }
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -104,14 +145,18 @@ export default function Header() {
                 </div>
                 
                 <div className="flex items-center gap-4">
-                  <div className="flex items-center gap-2">
-                    <Mail className="w-3.5 h-3.5 text-white/80" />
-                    <span className="text-white/90">info@oxiva.com</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Phone className="w-3.5 h-3.5 text-white/80" />
-                    <span className="text-white/90">0850 XXX XX XX</span>
-                  </div>
+                  {settings.email && (
+                    <div className="flex items-center gap-2">
+                      <Mail className="w-3.5 h-3.5 text-white/80" />
+                      <span className="text-white/90">{settings.email}</span>
+                    </div>
+                  )}
+                  {settings.phone && (
+                    <div className="flex items-center gap-2">
+                      <Phone className="w-3.5 h-3.5 text-white/80" />
+                      <span className="text-white/90">{settings.phone}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
@@ -127,8 +172,8 @@ export default function Header() {
             {/* Logo */}
             <Link href="/" className="flex items-center">
               <Image
-                src="/images/logo.png"
-                alt="Oxiva Logo"
+                src={settings.logo ? settings.logo : "/images/logo.png"}
+                alt={`${settings.storeName || 'Oxiva'} Logo`}
                 width={140}
                 height={46}
                 className="h-10 md:h-12 w-auto"
@@ -143,6 +188,13 @@ export default function Header() {
                 className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
               >
                 Ana Sayfa
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
+              </Link>
+              <Link 
+                href="/products" 
+                className="relative text-gray-700 hover:text-primary-500 transition-colors font-medium group"
+              >
+                Ürünler
                 <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary-500 transition-all group-hover:w-full"></span>
               </Link>
               <Link 
@@ -225,6 +277,13 @@ export default function Header() {
                 Ana Sayfa
               </Link>
               <Link 
+                href="/products" 
+                onClick={() => setIsMenuOpen(false)}
+                className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
+              >
+                Ürünler
+              </Link>
+              <Link 
                 href={pathname === '/' ? '#benefits' : '/#benefits'}
                 onClick={(e) => scrollToSection(e, '#benefits')}
                 className="mobile-menu-item text-gray-700 hover:text-primary-500 transition-colors font-medium px-6 py-3 hover:bg-gray-50"
@@ -260,20 +319,24 @@ export default function Header() {
               {/* Contact Info */}
               <div className="mobile-menu-item border-t border-gray-100 mt-6 pt-4 px-6">
                 <div className="space-y-3">
-                  <a 
-                    href="mailto:info@oxiva.com"
-                    className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
-                  >
-                    <Mail className="w-4 h-4" />
-                    <span className="text-sm">info@oxiva.com</span>
-                  </a>
-                  <a 
-                    href="tel:0850XXXXXXX"
-                    className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
-                  >
-                    <Phone className="w-4 h-4" />
-                    <span className="text-sm">0850 XXX XX XX</span>
-                  </a>
+                  {settings.email && (
+                    <a 
+                      href={`mailto:${settings.email}`}
+                      className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
+                    >
+                      <Mail className="w-4 h-4" />
+                      <span className="text-sm">{settings.email}</span>
+                    </a>
+                  )}
+                  {settings.phone && (
+                    <a 
+                      href={`tel:${settings.phone.replace(/\s/g, '')}`}
+                      className="flex items-center gap-3 text-gray-600 hover:text-primary-500 transition-colors"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span className="text-sm">{settings.phone}</span>
+                    </a>
+                  )}
                 </div>
               </div>
             </nav>

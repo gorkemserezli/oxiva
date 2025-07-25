@@ -1,11 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
-import WhatsAppButton from "@/components/ui/WhatsAppButton";
-import { CartProvider } from "@/context/CartContext";
-import InitialLoader from "@/components/ui/InitialLoader";
+import ClientLayout from "@/components/layout/ClientLayout";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -32,15 +28,7 @@ export default function RootLayout({
   return (
     <html lang="tr">
       <body className={`${inter.variable} font-sans antialiased`}>
-        <InitialLoader />
-        <CartProvider>
-          <Header />
-          <main className="pt-[88px] md:pt-[112px]">
-            {children}
-          </main>
-          <Footer />
-          <WhatsAppButton />
-        </CartProvider>
+        <ClientLayout>{children}</ClientLayout>
       </body>
     </html>
   );

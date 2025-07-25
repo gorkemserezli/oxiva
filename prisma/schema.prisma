@@ -1,0 +1,246 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Kullanıcılar
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  password      String
+  firstName     String
+  lastName      String
+  phone         String?
+  role          Role      @default(USER)
+  emailVerified Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  orders        Order[]
+  addresses     Address[]
+}
+
+enum Role {
+  USER
+  ADMIN
+  SUPERADMIN
+}
+
+// Adresler
+model Address {
+  id              String    @id @default(cuid())
+  userId          String
+  user            User      @relation(fields: [userId], references: [id])
+  title           String
+  firstName       String
+  lastName        String
+  phone           String
+  address         String
+  city            String
+  district        String
+  isDefault       Boolean   @default(false)
+  
+  // Fatura bilgileri
+  invoiceType     InvoiceType?
+  taxNumber       String?
+  taxOffice       String?
+  tcNumber        String?
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum InvoiceType {
+  INDIVIDUAL
+  CORPORATE
+}
+
+// Ürünler
+model Product {
+  id              String    @id @default(cuid())
+  name            String
+  slug            String    @unique
+  description     String?
+  shortDesc       String?
+  price           Float
+  comparePrice    Float?
+  sku             String?   @unique
+  stock           Int       @default(0)
+  status          ProductStatus @default(ACTIVE)
+  
+  // Görseller
+  images          String[]
+  
+  // Özellikler
+  features        String[]
+  
+  // SEO
+  seoTitle        String?
+  seoDescription  String?
+  seoKeywords     String?
+  
+  
+  orderItems      OrderItem[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum ProductStatus {
+  ACTIVE
+  DRAFT
+  ARCHIVED
+}
+
+
+// Siparişler
+model Order {
+  id              String    @id @default(cuid())
+  orderNumber     String    @unique
+  userId          String?
+  user            User?     @relation(fields: [userId], references: [id])
+  
+  // Müşteri bilgileri (misafir alışverişler için)
+  customerEmail   String
+  customerPhone   String
+  customerName    String
+  
+  // Adresler
+  deliveryAddress Json
+  billingAddress  Json
+  
+  // Ödeme
+  paymentMethod   PaymentMethod
+  paymentStatus   PaymentStatus @default(PENDING)
+  paymentId       String?
+  
+  // Kargo
+  shippingCompany String
+  shippingCost    Float
+  trackingNumber  String?
+  
+  // Tutarlar
+  subtotal        Float
+  tax             Float
+  discount        Float     @default(0)
+  total           Float
+  
+  status          OrderStatus @default(NEW)
+  orderNote       String?
+  adminNotes      String?
+  
+  items           OrderItem[]
+  timeline        OrderEvent[]
+  
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+}
+
+enum PaymentMethod {
+  CREDIT_CARD
+  BANK_TRANSFER
+}
+
+enum PaymentStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+  REFUNDED
+}
+
+enum OrderStatus {
+  NEW
+  CONFIRMED
+  PROCESSING
+  SHIPPED
+  DELIVERED
+  CANCELLED
+  RETURNED
+}
+
+// Sipariş kalemleri
+model OrderItem {
+  id          String    @id @default(cuid())
+  orderId     String
+  order       Order     @relation(fields: [orderId], references: [id])
+  productId   String
+  product     Product   @relation(fields: [productId], references: [id])
+  
+  name        String
+  price       Float
+  quantity    Int
+  total       Float
+  
+  createdAt   DateTime  @default(now())
+}
+
+// Sipariş olayları (timeline)
+model OrderEvent {
+  id          String    @id @default(cuid())
+  orderId     String
+  order       Order     @relation(fields: [orderId], references: [id])
+  
+  action      String
+  description String?
+  userId      String?
+  userName    String
+  
+  createdAt   DateTime  @default(now())
+}
+
+// Admin ayarları
+model Setting {
+  id          String    @id @default(cuid())
+  key         String    @unique
+  value       Json
+  description String?
+  
+  updatedAt   DateTime  @updatedAt
+}
+
+// WhatsApp otomasyonu (mevcut)
+model WhatsAppOrder {
+  id            String   @id @default(cuid())
+  orderId       String   @unique
+  customerPhone String
+  customerName  String
+  profileName   String?
+  quantity      Int
+  totalPrice    Float
+  address       String
+  city          String
+  status        OrderStatus @default(NEW)
+  messages      Json      // Tüm mesaj geçmişi
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  
+  @@index([customerPhone])
+  @@index([status])
+}
+
+// WhatsApp mesajları
+model WhatsAppMessage {
+  id          String    @id @default(cuid())
+  orderId     String?
+  phone       String
+  message     String
+  status      MessageStatus @default(PENDING)
+  error       String?
+  
+  createdAt   DateTime  @default(now())
+  sentAt      DateTime?
+}
+
+enum MessageStatus {
+  PENDING
+  SENT
+  FAILED
+}
