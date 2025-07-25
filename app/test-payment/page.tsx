@@ -58,7 +58,7 @@ export default function TestPaymentPage() {
         alert('Hata: ' + (data.message || 'Ödeme başlatılamadı'))
       }
     } catch (error) {
-      alert('Hata: ' + error.message)
+      alert('Hata: ' + (error instanceof Error ? error.message : 'Bilinmeyen hata'))
     } finally {
       setLoading(false)
     }

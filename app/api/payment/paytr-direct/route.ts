@@ -1,9 +1,38 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
+interface PaymentItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
+interface PaymentRequest {
+  orderId: string;
+  total: number;
+  user: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    phone?: string;
+  };
+  deliveryAddress: {
+    address: string;
+    city: string;
+    district: string;
+    phone?: string;
+  };
+  items: PaymentItem[];
+  cardNumber: string;
+  cardName: string;
+  expiryMonth: string;
+  expiryYear: string;
+  cvv: string;
+}
+
 export async function POST(request: NextRequest) {
   try {
-    const body = await request.json();
+    const body: PaymentRequest = await request.json();
     
     // PayTR credentials
     const merchantId = process.env.PAYTR_MERCHANT_ID!;
@@ -30,7 +59,7 @@ export async function POST(request: NextRequest) {
     const paymentAmount = Math.round(total * 100); // Convert to kuruş
     
     // Create basket
-    const basket = items.map(item => [
+    const basket = items.map((item: PaymentItem) => [
       item.name,
       (item.price * 100).toFixed(0),
       item.quantity

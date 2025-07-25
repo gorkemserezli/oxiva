@@ -1,6 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
 import crypto from 'crypto';
 
+interface PaymentItem {
+  name: string;
+  price: number;
+  quantity: number;
+}
+
 interface PaymentRequest {
   email: string;
   payment_amount: number;
@@ -14,6 +20,22 @@ interface PaymentRequest {
   no_installment: number;
   max_installment: number;
   lang: string;
+  // For checkout format
+  orderId?: string;
+  total?: number;
+  items?: PaymentItem[];
+  user?: {
+    email: string;
+    firstName: string;
+    lastName: string;
+    phone?: string;
+  };
+  deliveryAddress?: {
+    address: string;
+    city: string;
+    district: string;
+    phone?: string;
+  };
 }
 
 export async function POST(request: NextRequest) {
@@ -37,7 +59,7 @@ export async function POST(request: NextRequest) {
       paymentAmount = Math.round(body.total * 100); // Convert to kuruş
       
       // Create basket from items
-      const basket = body.items.map(item => [
+      const basket = body.items.map((item: PaymentItem) => [
         item.name,
         (item.price * 100).toFixed(0), // Convert to kuruş
         item.quantity
