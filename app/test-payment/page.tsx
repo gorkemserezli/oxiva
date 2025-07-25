@@ -50,12 +50,24 @@ export default function TestPaymentPage() {
         body: JSON.stringify(orderData)
       })
 
+      if (!response.ok) {
+        console.error('Response status:', response.status)
+        const errorText = await response.text()
+        console.error('Error response:', errorText)
+        throw new Error(`HTTP error! status: ${response.status}`)
+      }
+
       const data = await response.json()
+      
+      console.log('PayTR Response:', data) // Debug için
       
       if (data.status === 'success' && data.token) {
         setIframeToken(data.token)
       } else {
-        alert('Hata: ' + (data.message || 'Ödeme başlatılamadı'))
+        // Daha detaylı hata mesajı
+        const errorMessage = data.error || data.message || data.reason || 'Ödeme başlatılamadı'
+        console.error('PayTR Error:', data)
+        alert('Hata: ' + errorMessage)
       }
     } catch (error) {
       alert('Hata: ' + (error instanceof Error ? error.message : 'Bilinmeyen hata'))
