@@ -508,23 +508,54 @@ export default function CheckoutPage() {
           lang: 'tr'
         }
         
-        // Call PayTR API
-        const response = await fetch('/api/payment/paytr', {
+        // Use PayTR Direct API for credit card payment
+        const directApiData = {
+          orderId: orderResult.orderNumber,
+          total,
+          user: {
+            email: formData.email,
+            firstName: formData.firstName,
+            lastName: formData.lastName,
+            phone: formData.phone
+          },
+          deliveryAddress: {
+            address: formData.address,
+            city: cityName,
+            district: districtName,
+            phone: formData.phone
+          },
+          items: [{
+            name: product.name,
+            price: discountedPrice,
+            quantity: quantity
+          }],
+          // Credit card data
+          cardNumber: formData.cardNumber,
+          cardName: formData.cardName,
+          expiryMonth: formData.expiryDate.split('/')[0],
+          expiryYear: '20' + formData.expiryDate.split('/')[1],
+          cvv: formData.cvv
+        }
+        
+        const response = await fetch('/api/payment/paytr-direct', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(orderData)
+          body: JSON.stringify(directApiData)
         })
         
         const result = await response.json()
         
-        if (result.status === 'success' && result.token) {
-          // Show PayTR iframe
-          setPaytrToken(result.token)
-          setShowPaytrIframe(true)
+        if (result.status === 'success') {
+          // Payment successful
+          localStorage.removeItem('cart')
+          router.push(`/payment/success?orderNumber=${orderResult.orderNumber}`)
+        } else if (result.status === '3d_required' && result.secure_url) {
+          // Redirect to 3D Secure page
+          window.location.href = result.secure_url
         } else {
-          throw new Error(result.reason || 'Ödeme başlatılamadı')
+          throw new Error(result.message || 'Ödeme başarısız')
         }
       } else if (selectedPaymentMethod === 'bankTransfer') {
         // For bank transfer, redirect to order confirmation

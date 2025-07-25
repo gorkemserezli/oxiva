@@ -18,43 +18,71 @@ interface PaymentRequest {
 
 export async function POST(request: NextRequest) {
   try {
-    const body: PaymentRequest = await request.json();
+    const body = await request.json();
     
     // PayTR credentials from environment
     const merchantId = process.env.PAYTR_MERCHANT_ID!;
     const merchantKey = process.env.PAYTR_MERCHANT_KEY!;
     const merchantSalt = process.env.PAYTR_MERCHANT_SALT!;
     
-    // Use provided order ID
-    const merchantOid = body.merchant_oid;
+    // Handle both checkout format and test format
+    const isCheckoutFormat = body.orderId && body.total;
     
-    // Customer info
+    let merchantOid, email, paymentAmount, userBasketStr, user;
+    
+    if (isCheckoutFormat) {
+      // Format from checkout page
+      merchantOid = body.orderId;
+      email = body.user.email;
+      paymentAmount = Math.round(body.total * 100); // Convert to kuruş
+      
+      // Create basket from items
+      const basket = body.items.map(item => [
+        item.name,
+        (item.price * 100).toFixed(0), // Convert to kuruş
+        item.quantity
+      ]);
+      userBasketStr = btoa(JSON.stringify(basket));
+      
+      user = {
+        name: body.user.firstName,
+        surname: body.user.lastName,
+        address: `${body.deliveryAddress.address} ${body.deliveryAddress.district} ${body.deliveryAddress.city}`,
+        phone: body.deliveryAddress.phone || body.user.phone || ''
+      };
+    } else {
+      // Original format
+      merchantOid = body.merchant_oid;
+      email = body.email;
+      paymentAmount = body.payment_amount;
+      
+      const userBasket = JSON.parse(body.user_basket);
+      userBasketStr = btoa(JSON.stringify(userBasket));
+      
+      const nameParts = body.user_name.split(' ');
+      user = {
+        name: nameParts[0],
+        surname: nameParts.slice(1).join(' ') || nameParts[0],
+        address: body.user_address,
+        phone: body.user_phone
+      };
+    }
+    
     const userIp = request.headers.get('x-forwarded-for') || '127.0.0.1';
-    const email = body.email;
-    const paymentAmount = body.payment_amount; // Already in kuruş from frontend
-    
-    // Parse and re-encode basket
-    const userBasket = JSON.parse(body.user_basket);
-    const userBasketStr = btoa(JSON.stringify(userBasket));
-    
-    // Parse user info from provided data
-    const nameParts = body.user_name.split(' ');
-    const user = {
-      name: nameParts[0],
-      surname: nameParts.slice(1).join(' ') || nameParts[0],
-      address: body.user_address,
-      phone: body.user_phone
-    };
     
     // Success and fail URLs
     const merchantOkUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/payment/success`;
     const merchantFailUrl = `${process.env.NEXT_PUBLIC_SITE_URL}/payment/fail`;
     
+    // Callback URL for payment notification
+    const siteUrl = process.env.NODE_ENV === 'production' ? 'https://oxiva.tr' : process.env.NEXT_PUBLIC_SITE_URL;
+    const merchantNotifyUrl = `${siteUrl}/api/payment/callback`;
+    
     // Other required parameters
     const currency = 'TL';
-    const testMode = body.test_mode.toString();
-    const noInstallment = body.no_installment.toString();
-    const maxInstallment = body.max_installment.toString();
+    const testMode = (body.test_mode || process.env.PAYTR_TEST_MODE || 1).toString(); // Default to test mode
+    const noInstallment = (body.no_installment || 0).toString();
+    const maxInstallment = (body.max_installment || 0).toString();
     const timeout = '30'; // 30 minutes timeout
     
     // Create hash string
@@ -82,6 +110,7 @@ export async function POST(request: NextRequest) {
       user_phone: user.phone,
       merchant_ok_url: merchantOkUrl,
       merchant_fail_url: merchantFailUrl,
+      merchant_notify_url: merchantNotifyUrl,
       currency: currency,
       test_mode: testMode,
       no_installment: noInstallment,
@@ -113,8 +142,10 @@ export async function POST(request: NextRequest) {
     } else {
       return NextResponse.json(
         { 
+          status: 'error',
           success: false, 
-          error: result.reason || 'Payment initialization failed' 
+          error: result.reason || 'Payment initialization failed',
+          message: result.reason || 'Payment initialization failed'
         },
         { status: 400 }
       );

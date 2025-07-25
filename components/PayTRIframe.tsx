@@ -30,8 +30,8 @@ export default function PayTRIframe({ token, onClose }: PayTRIframeProps) {
   
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl h-[600px] overflow-hidden">
-        <div className="p-4 border-b flex items-center justify-between">
+      <div className="bg-white rounded-lg shadow-xl w-full max-w-4xl max-h-[90vh] flex flex-col">
+        <div className="p-4 border-b flex items-center justify-between flex-shrink-0">
           <h3 className="text-lg font-semibold">Güvenli Ödeme</h3>
           <button
             onClick={onClose}
@@ -43,12 +43,16 @@ export default function PayTRIframe({ token, onClose }: PayTRIframeProps) {
           </button>
         </div>
         
-        <iframe
-          ref={iframeRef}
-          src={`https://www.paytr.com/odeme/guvenli/${token}`}
-          className="w-full h-full"
-          frameBorder="0"
-        />
+        <div className="flex-1 overflow-auto">
+          <iframe
+            ref={iframeRef}
+            src={`https://www.paytr.com/odeme/guvenli/${token}`}
+            className="w-full"
+            style={{ minHeight: '800px' }}
+            frameBorder="0"
+            scrolling="yes"
+          />
+        </div>
       </div>
     </div>
   )

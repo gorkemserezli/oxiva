@@ -121,9 +121,9 @@ export async function POST(request: NextRequest) {
         }
       }
       
-      // Generate order number
+      // Generate order number (PayTR requires alphanumeric only)
       const orderCount = await tx.order.count()
-      const orderNumber = `ORD-${(orderCount + 1).toString().padStart(6, '0')}`
+      const orderNumber = `ORD${(orderCount + 1).toString().padStart(6, '0')}`
       
       // Create order
       const order = await tx.order.create({
